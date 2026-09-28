@@ -1,8 +1,6 @@
-
-```css
 /* =========================================
    VOLTROUTE - SMART EV CHARGING SYSTEM
-   STYLE.CSS
+   GREEN UI THEME
 ========================================= */
 
 /* ---------- BASIC RESET ---------- */
@@ -19,7 +17,7 @@ html {
 
 body {
     font-family: Arial, sans-serif;
-    background: #07111f;
+    background: #071a12;
     color: white;
     line-height: 1.6;
 }
@@ -31,11 +29,11 @@ body {
 
 header {
     width: 100%;
-    background: rgba(7, 17, 31, 0.95);
+    background: rgba(7, 26, 18, 0.95);
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid #1e3a5f;
+    border-bottom: 1px solid #166534;
 }
 
 .navbar {
@@ -51,7 +49,7 @@ header {
 .logo {
     font-size: 26px;
     font-weight: bold;
-    color: #00d9ff;
+    color: #22c55e;
 }
 
 .nav-links {
@@ -68,7 +66,7 @@ header {
 }
 
 .nav-links a:hover {
-    color: #00d9ff;
+    color: #22c55e;
 }
 
 
@@ -88,8 +86,8 @@ header {
     background:
         linear-gradient(
             135deg,
-            #07111f,
-            #0b1f36
+            #071a12,
+            #0b2b1b
         );
 }
 
@@ -98,7 +96,7 @@ header {
 }
 
 .small-title {
-    color: #00d9ff;
+    color: #22c55e;
     font-size: 14px;
     letter-spacing: 2px;
     margin-bottom: 20px;
@@ -111,13 +109,15 @@ header {
 }
 
 .hero-content p {
-    color: #b8c7d9;
+    color: #b7c9bc;
     font-size: 17px;
     margin-bottom: 30px;
 }
 
 
-/* BUTTONS */
+/* =========================================
+   BUTTONS
+========================================= */
 
 .hero-buttons {
     display: flex;
@@ -134,26 +134,29 @@ header {
 }
 
 .primary-btn {
-    background: #00d9ff;
-    color: #06111f;
+    background: #22c55e;
+    color: #06140b;
 }
 
 .primary-btn:hover {
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(34, 197, 94, 0.25);
 }
 
 .secondary-btn {
-    border: 1px solid #00d9ff;
-    color: #00d9ff;
+    border: 1px solid #22c55e;
+    color: #22c55e;
 }
 
 .secondary-btn:hover {
-    background: #00d9ff;
-    color: #06111f;
+    background: #22c55e;
+    color: #06140b;
 }
 
 
-/* HERO IMAGE */
+/* =========================================
+   HERO IMAGE
+========================================= */
 
 .hero-image {
     width: 50%;
@@ -162,7 +165,7 @@ header {
 .hero-image img {
     width: 100%;
     border-radius: 20px;
-    box-shadow: 0 0 40px rgba(0, 217, 255, 0.2);
+    box-shadow: 0 0 40px rgba(34, 197, 94, 0.2);
 }
 
 
@@ -173,7 +176,7 @@ header {
 .find-section {
     padding: 90px 8%;
     text-align: center;
-    background: #0b1726;
+    background: #0a2115;
 }
 
 .find-section h2 {
@@ -182,7 +185,7 @@ header {
 }
 
 .find-section p {
-    color: #b8c7d9;
+    color: #b7c9bc;
 }
 
 .search-box {
@@ -199,12 +202,17 @@ header {
     border: none;
     border-radius: 8px;
     font-size: 16px;
+    outline: none;
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 0 2px #22c55e;
 }
 
 .search-box button,
 button {
-    background: #00d9ff;
-    color: #06111f;
+    background: #22c55e;
+    color: #06140b;
 
     border: none;
     padding: 14px 22px;
@@ -223,7 +231,7 @@ button:hover {
 
 #searchResult {
     margin-top: 15px;
-    color: #00d9ff;
+    color: #22c55e;
 }
 
 
@@ -254,9 +262,9 @@ button:hover {
 }
 
 .station-card {
-    background: #102338;
+    background: #10291c;
 
-    border: 1px solid #1e3a5f;
+    border: 1px solid #166534;
     border-radius: 15px;
 
     padding: 20px;
@@ -267,7 +275,8 @@ button:hover {
 
 .station-card:hover {
     transform: translateY(-8px);
-    border-color: #00d9ff;
+    border-color: #22c55e;
+    box-shadow: 0 12px 30px rgba(34, 197, 94, 0.12);
 }
 
 .station-card img {
@@ -285,7 +294,7 @@ button:hover {
 }
 
 .station-card p {
-    color: #b8c7d9;
+    color: #b7c9bc;
 }
 
 .station-info {
@@ -294,7 +303,7 @@ button:hover {
 
     margin: 15px 0;
 
-    color: #00d9ff;
+    color: #22c55e;
 }
 
 .available {
@@ -312,11 +321,17 @@ button:hover {
     text-align: center;
     padding: 12px;
 
-    border: 1px solid #00d9ff;
+    border: 1px solid #22c55e;
     border-radius: 8px;
 
-    color: #00d9ff;
+    color: #22c55e;
     text-decoration: none;
+    transition: 0.3s;
+}
+
+.direction-btn:hover {
+    background: #22c55e;
+    color: #06140b;
 }
 
 
@@ -326,7 +341,7 @@ button:hover {
 
 .fast-section {
     padding: 90px 8%;
-    background: #0b1726;
+    background: #0a2115;
 
     display: flex;
     justify-content: space-around;
@@ -342,7 +357,7 @@ button:hover {
 }
 
 .fast-section p {
-    color: #b8c7d9;
+    color: #b7c9bc;
     max-width: 450px;
 }
 
@@ -353,7 +368,7 @@ button:hover {
 }
 
 .fast-box div {
-    background: #102338;
+    background: #10291c;
 
     padding: 25px;
     min-width: 150px;
@@ -361,11 +376,11 @@ button:hover {
     border-radius: 12px;
     text-align: center;
 
-    border: 1px solid #1e3a5f;
+    border: 1px solid #166534;
 }
 
 .fast-box h3 {
-    color: #00d9ff;
+    color: #22c55e;
     font-size: 28px;
 }
 
@@ -385,7 +400,7 @@ button:hover {
 }
 
 .device-section > p {
-    color: #b8c7d9;
+    color: #b7c9bc;
     margin-bottom: 40px;
 }
 
@@ -401,12 +416,19 @@ button:hover {
 
     padding: 30px;
 
-    background: #102338;
+    background: #10291c;
     border-radius: 15px;
 
-    border: 1px solid #1e3a5f;
+    border: 1px solid #166534;
 
     font-size: 35px;
+
+    transition: 0.3s;
+}
+
+.device-card:hover {
+    transform: translateY(-7px);
+    border-color: #22c55e;
 }
 
 .device-card h3 {
@@ -416,7 +438,7 @@ button:hover {
 
 .device-card p {
     font-size: 14px;
-    color: #b8c7d9;
+    color: #b7c9bc;
 }
 
 
@@ -427,7 +449,7 @@ button:hover {
 .qr-section {
     padding: 90px 8%;
 
-    background: #0b1726;
+    background: #0a2115;
 
     display: flex;
     justify-content: center;
@@ -447,13 +469,13 @@ button:hover {
 }
 
 .qr-info p {
-    color: #b8c7d9;
+    color: #b7c9bc;
     margin-bottom: 25px;
 }
 
 .qr-box {
     background: white;
-    color: #06111f;
+    color: #06140b;
 
     padding: 25px;
     border-radius: 15px;
@@ -489,19 +511,19 @@ button:hover {
 
     text-align: left;
 
-    background: #102338;
+    background: #10291c;
 
-    border: 1px solid #1e3a5f;
+    border: 1px solid #166534;
     border-radius: 15px;
 }
 
 .payment-card p {
     margin: 12px 0;
-    color: #b8c7d9;
+    color: #b7c9bc;
 }
 
 .payment-card h3 {
-    color: #00d9ff;
+    color: #22c55e;
     margin: 25px 0;
 }
 
@@ -569,12 +591,18 @@ button:hover {
 .safety-section {
     padding: 90px 8%;
 
-    background: #0b1726;
+    background: #0a2115;
     text-align: center;
 }
 
 .safety-section h2 {
     font-size: 38px;
+    margin-bottom: 30px;
+}
+
+.safety-image {
+    width: min(700px, 100%);
+    border-radius: 15px;
     margin-bottom: 30px;
 }
 
@@ -589,18 +617,20 @@ button:hover {
 }
 
 .safety-section li {
-    background: #102338;
+    background: #10291c;
 
     margin: 12px 0;
     padding: 15px 20px;
 
     border-radius: 8px;
-    color: #b8c7d9;
+    color: #b7c9bc;
+
+    border-left: 3px solid #22c55e;
 }
 
 .safety-section li::before {
     content: "✓ ";
-    color: #00d9ff;
+    color: #22c55e;
     font-weight: bold;
 }
 
@@ -623,7 +653,7 @@ button:hover {
     max-width: 800px;
     margin: auto;
 
-    color: #b8c7d9;
+    color: #b7c9bc;
     font-size: 17px;
 }
 
@@ -635,7 +665,7 @@ button:hover {
 .contact-section {
     padding: 90px 8%;
 
-    background: #0b1726;
+    background: #0a2115;
     text-align: center;
 }
 
@@ -657,13 +687,20 @@ button:hover {
 .contact-section textarea {
     padding: 15px;
 
-    border: 1px solid #1e3a5f;
+    border: 1px solid #166534;
     border-radius: 8px;
 
-    background: #102338;
+    background: #10291c;
     color: white;
 
     font-size: 16px;
+}
+
+.contact-section input:focus,
+.contact-section textarea:focus {
+    outline: none;
+    border-color: #22c55e;
+    box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.15);
 }
 
 .contact-section textarea {
@@ -683,16 +720,16 @@ footer {
 
     background: #040b14;
 
-    border-top: 1px solid #1e3a5f;
+    border-top: 1px solid #166534;
 }
 
 footer h3 {
-    color: #00d9ff;
+    color: #22c55e;
     font-size: 26px;
 }
 
 footer p {
-    color: #8fa3ba;
+    color: #8ca895;
     margin-top: 10px;
 }
 
@@ -789,4 +826,3 @@ footer h4 {
     }
 
 }
-```
