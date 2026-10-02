@@ -535,6 +535,43 @@ textarea {
 }
 
 
+/* ================= LOCATION LINK ================= */
+
+.location-link {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    background: #eaf9ef;
+
+    color: #168b43;
+
+    border: 1px solid #b9e5c7;
+
+    border-radius: 9px;
+
+    font-weight: 700;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.location-link:hover {
+    background: #16a34a;
+
+    color: white;
+
+    transform: translateY(-2px);
+}
+
+
 /* ================= STATS ================= */
 
 .stats-grid {
