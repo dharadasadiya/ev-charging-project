@@ -1,830 +1,663 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VoltRoute | Smart EV Charging System</title>
+    <title>VoltRoute - Smart EV Charging System</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+    <!-- ================= NAVBAR ================= -->
 
-<header class="navbar">
+    <header class="navbar">
 
-    <div class="logo">
-        ⚡ VoltRoute
-    </div>
-
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#find">Find Charger</a>
-        <a href="#stations">Stations</a>
-        <a href="#fast">Fast Charging</a>
-        <a href="#device">Device Charging</a>
-        <a href="#payment">QR & Payment</a>
-        <a href="#emergency">Emergency</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
-</header>
-
-
-<!-- ================= HERO ================= -->
-
-<section id="home" class="hero">
-
-    <div class="hero-content">
-
-        <p class="small-title">SMART EV CHARGING NETWORK</p>
-
-        <h1>
-            Charge Smarter.<br>
-            <span>Drive Further. ⚡</span>
-        </h1>
-
-        <p>
-            Find nearby EV charging stations, check charging
-            availability and enjoy a simple and smart charging experience.
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#find" class="btn">
-                Find Charger
-            </a>
-
-            <a href="#stations" class="btn btn-outline">
-                View Stations
-            </a>
-
+        <div class="logo">
+            ⚡ VoltRoute
         </div>
 
-    </div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#stations">Stations</a>
+            <a href="#booking">Booking</a>
+            <a href="#features">Features</a>
+            <a href="#contact">Contact</a>
+        </nav>
 
-    <div class="hero-card">
-
-        <div class="charging-icon">
-            ⚡
-        </div>
-
-        <h3>Smart Charging</h3>
-
-        <p>
-            Fast, safe and convenient EV charging
-            for modern electric vehicles.
-        </p>
-
-        <div class="charge-status">
-            <span></span>
-            System Online
-        </div>
-
-    </div>
-
-</section>
+    </header>
 
 
-<!-- ================= FIND CHARGER ================= -->
+    <!-- ================= HOME ================= -->
 
-<section id="find" class="section">
+    <section id="home" class="hero">
 
-    <div class="section-heading">
+        <div class="hero-content">
 
-        <p>SEARCH</p>
+            <p class="tagline">SMART • FAST • ECO-FRIENDLY</p>
 
-        <h2>Find EV Charging Station</h2>
+            <h1>
+                Smart EV Charging<br>
+                Made <span>Simple</span>
+            </h1>
 
-        <span>
-            Enter your city or area to find available charging stations.
-        </span>
-
-    </div>
-
-    <div class="search-box">
-
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Enter city or area name..."
-        >
-
-        <button onclick="searchStation()">
-            🔍 Search
-        </button>
-
-    </div>
-
-    <div id="searchResult" class="search-result"></div>
-
-</section>
-
-
-<!-- ================= STATIONS ================= -->
-
-<section id="stations" class="section light-section">
-
-    <div class="section-heading">
-
-        <p>OUR NETWORK</p>
-
-        <h2>Available Charging Stations</h2>
-
-        <span>
-            Choose a charging station according to your requirement.
-        </span>
-
-    </div>
-
-
-    <div class="station-grid">
-
-
-        <!-- ================= STATION 1 ================= -->
-
-        <div class="station-card">
-
-            <div class="card-top">
-
-                <span class="station-icon">⚡</span>
-
-                <span class="available">
-                    ● Available
-                </span>
-
-            </div>
-
-            <h3>Ahmedabad EV Hub</h3>
-
-            <p class="location">
-                📍 SG Highway, Ahmedabad
+            <p>
+                Find nearby EV charging stations, check availability,
+                calculate charging cost and reserve your charging slot
+                with VoltRoute.
             </p>
 
-            <div class="details">
-
-                <div>
-                    <strong>60 kW</strong>
-                    <small>Power</small>
-                </div>
-
-                <div>
-                    <strong>CCS2</strong>
-                    <small>Connector</small>
-                </div>
-
-                <div>
-                    <strong>4</strong>
-                    <small>Ports</small>
-                </div>
-
+            <div class="hero-buttons">
+                <a href="#stations" class="btn">Find Charging Station</a>
+                <a href="#booking" class="btn secondary">Book a Slot</a>
             </div>
-
-            <button
-                class="card-button"
-                onclick="viewStation('Ahmedabad EV Hub')"
-            >
-                View Station
-            </button>
-
-            <!-- Google Maps Location -->
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=Ahmedabad+EV+Hub+SG+Highway+Ahmedabad"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="location-link">
-                📍 View Location
-            </a>
 
         </div>
 
+        <div class="hero-card">
 
-        <!-- ================= STATION 2 ================= -->
-
-        <div class="station-card">
-
-            <div class="card-top">
-
-                <span class="station-icon">🔋</span>
-
-                <span class="available">
-                    ● Available
-                </span>
-
+            <div class="car-icon">
+                🚗⚡
             </div>
 
-            <h3>City Power Charge</h3>
+            <h2>EV Charging</h2>
 
-            <p class="location">
-                📍 Prahlad Nagar, Ahmedabad
-            </p>
+            <p>Power your journey with clean energy.</p>
 
-            <div class="details">
-
-                <div>
-                    <strong>22 kW</strong>
-                    <small>Power</small>
-                </div>
-
-                <div>
-                    <strong>Type 2</strong>
-                    <small>Connector</small>
-                </div>
-
-                <div>
-                    <strong>3</strong>
-                    <small>Ports</small>
-                </div>
-
+            <div class="charging-status">
+                <span class="dot"></span>
+                Charging Stations Available
             </div>
-
-            <button
-                class="card-button"
-                onclick="viewStation('City Power Charge')"
-            >
-                View Station
-            </button>
-
-            <!-- Google Maps Location -->
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=City+Power+Charge+Prahlad+Nagar+Ahmedabad"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="location-link">
-                📍 View Location
-            </a>
 
         </div>
 
-
-        <!-- ================= STATION 3 ================= -->
-
-        <div class="station-card">
-
-            <div class="card-top">
-
-                <span class="station-icon">⚡</span>
-
-                <span class="available">
-                    ● Available
-                </span>
-
-            </div>
-
-            <h3>VoltFast Station</h3>
-
-            <p class="location">
-                📍 Satellite Road, Ahmedabad
-            </p>
-
-            <div class="details">
-
-                <div>
-                    <strong>120 kW</strong>
-                    <small>Power</small>
-                </div>
-
-                <div>
-                    <strong>CCS2</strong>
-                    <small>Connector</small>
-                </div>
-
-                <div>
-                    <strong>6</strong>
-                    <small>Ports</small>
-                </div>
-
-            </div>
-
-            <button
-                class="card-button"
-                onclick="viewStation('VoltFast Station')"
-            >
-                View Station
-            </button>
-
-            <!-- Google Maps Location -->
-            <a
-                href="https://www.google.com/maps/search/?api=1&query=VoltFast+Station+Satellite+Road+Ahmedabad"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="location-link">
-                📍 View Location
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ================= FAST CHARGING ================= -->
+    <!-- ================= STATISTICS ================= -->
 
-<section id="fast" class="section">
-
-    <div class="section-heading">
-
-        <p>FAST CHARGING</p>
-
-        <h2>Power Up Quickly</h2>
-
-        <span>
-            Our fast charging network is designed for quick and efficient charging.
-        </span>
-
-    </div>
-
-
-    <div class="stats-grid">
+    <section class="stats">
 
         <div class="stat-card">
-
-            <div class="stat-icon">⚡</div>
-
-            <h3>120 kW</h3>
-
-            <p>Maximum Charging Power</p>
-
+            <h2>50+</h2>
+            <p>Charging Stations</p>
         </div>
-
 
         <div class="stat-card">
-
-            <div class="stat-icon">🚗</div>
-
-            <h3>6 Ports</h3>
-
-            <p>Available Fast Charging Ports</p>
-
+            <h2>120+</h2>
+            <p>Charging Points</p>
         </div>
-
 
         <div class="stat-card">
-
-            <div class="stat-icon">🔌</div>
-
-            <h3>CCS2</h3>
-
-            <p>Fast Charging Connector</p>
-
+            <h2>24/7</h2>
+            <p>Service Available</p>
         </div>
-
 
         <div class="stat-card">
-
-            <div class="stat-icon">⏱️</div>
-
-            <h3>Fast</h3>
-
-            <p>Quick Charging Experience</p>
-
+            <h2>100%</h2>
+            <p>Digital Booking</p>
         </div>
 
-    </div>
-
-</section>
+    </section>
 
 
-<!-- ================= DEVICE CHARGING ================= -->
+    <!-- ================= STATIONS ================= -->
 
-<section id="device" class="section light-section">
+    <section id="stations" class="section">
 
-    <div class="section-heading">
+        <div class="section-heading">
 
-        <p>DEVICE CHARGING</p>
+            <p class="small-title">FIND A STATION</p>
 
-        <h2>Charge Your Devices</h2>
-
-        <span>
-            Convenient charging facilities for your electronic devices.
-        </span>
-
-    </div>
-
-
-    <div class="device-grid">
-
-        <div class="device-card">
-
-            <div class="device-icon">
-                📱
-            </div>
-
-            <h3>Mobile Charging</h3>
+            <h2>Nearby Charging Stations</h2>
 
             <p>
-                Charge your smartphone while your EV is charging.
+                Search for your preferred charging station
+                and check its availability.
             </p>
 
         </div>
 
 
-        <div class="device-card">
-
-            <div class="device-icon">
-                💻
-            </div>
-
-            <h3>Laptop Charging</h3>
-
-            <p>
-                Keep your laptop powered during your charging session.
-            </p>
-
-        </div>
-
-
-        <div class="device-card">
-
-            <div class="device-icon">
-                🔌
-            </div>
-
-            <h3>USB Charging</h3>
-
-            <p>
-                Convenient USB charging ports for small devices.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= QR & PAYMENT ================= -->
-
-<section id="payment" class="section">
-
-    <div class="section-heading">
-
-        <p>SMART PAYMENT</p>
-
-        <h2>QR & Payment System</h2>
-
-        <span>
-            Scan the QR code, check station details and complete payment.
-        </span>
-
-    </div>
-
-
-    <div class="payment-grid">
-
-        <div class="qr-card">
-
-            <div class="fake-qr">
-
-                <div class="qr-pattern">
-                    QR
-                </div>
-
-            </div>
-
-            <h3>Station QR Code</h3>
-
-            <p>
-                Scan the QR code to access charging station information.
-            </p>
-
-            <button
-                class="card-button"
-                onclick="showQR()"
-            >
-                Scan / View QR
-            </button>
-
-        </div>
-
-
-        <div class="payment-card">
-
-            <div class="payment-icon">
-                💳
-            </div>
-
-            <h3>Demo Payment</h3>
-
-            <p>
-                Complete a sample EV charging payment.
-            </p>
-
-            <div class="price">
-                ₹300
-            </div>
-
-            <p>
-                25 kWh Charging
-            </p>
-
-            <button
-                class="card-button"
-                onclick="paymentDemo()"
-            >
-                Pay Now
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= EMERGENCY ================= -->
-
-<section id="emergency" class="section emergency-section">
-
-    <div class="section-heading">
-
-        <p>SAFETY SYSTEM</p>
-
-        <h2>Emergency Safety System</h2>
-
-        <span>
-            Quick access to emergency and safety support.
-        </span>
-
-    </div>
-
-
-    <div class="emergency-grid">
-
-        <div class="emergency-card fire">
-
-            <div class="emergency-icon">
-                🔥
-            </div>
-
-            <h3>Fire Emergency</h3>
-
-            <p>
-                Follow safety instructions in case of fire or smoke.
-            </p>
-
-            <button onclick="fireEmergency()">
-                Fire Emergency
-            </button>
-
-        </div>
-
-
-        <div class="emergency-card electrical">
-
-            <div class="emergency-icon">
-                ⚠️
-            </div>
-
-            <h3>Electrical Emergency</h3>
-
-            <p>
-                Stop using damaged cables or electrical equipment.
-            </p>
-
-            <button onclick="electricalEmergency()">
-                Electrical Emergency
-            </button>
-
-        </div>
-
-
-        <div class="emergency-card support">
-
-            <div class="emergency-icon">
-                📞
-            </div>
-
-            <h3>Control Room</h3>
-
-            <p>
-                Contact the charging station support team.
-            </p>
-
-            <button onclick="contactControl()">
-                Contact Support
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="safety-box">
-
-        <h3>🛡️ Safety Instructions</h3>
-
-        <ul>
-
-            <li>
-                Do not touch charging cables with wet hands.
-            </li>
-
-            <li>
-                Stop charging if you notice smoke or sparks.
-            </li>
-
-            <li>
-                Keep the charging area clean and dry.
-            </li>
-
-            <li>
-                In an emergency, move to a safe location.
-            </li>
-
-            <li>
-                Contact emergency services when required.
-            </li>
-
-        </ul>
-
-    </div>
-
-</section>
-
-
-<!-- ================= ABOUT ================= -->
-
-<section class="section about-section">
-
-    <div class="about-content">
-
-        <div>
-
-            <p class="section-label">
-                ABOUT VOLTROUTE
-            </p>
-
-            <h2>
-                Smart Technology for
-                Electric Mobility
-            </h2>
-
-        </div>
-
-
-        <div>
-
-            <p>
-                VoltRoute is a Smart EV Charging System designed
-                to make electric vehicle charging simple,
-                accessible and convenient.
-            </p>
-
-            <p>
-                The system provides charging station information,
-                fast charging details, device charging,
-                QR information, payment demonstration and
-                emergency support.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CONTACT ================= -->
-
-<section id="contact" class="section light-section">
-
-    <div class="section-heading">
-
-        <p>GET IN TOUCH</p>
-
-        <h2>Contact Us</h2>
-
-        <span>
-            Send us your message or query.
-        </span>
-
-    </div>
-
-
-    <form
-        class="contact-form"
-        onsubmit="contactMessage(event)"
-    >
-
-        <div class="form-row">
-
-            <div class="form-group">
-
-                <label>Name</label>
-
-                <input
-                    type="text"
-                    placeholder="Enter your name"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>Email</label>
-
-                <input
-                    type="email"
-                    placeholder="Enter your email"
-                    required
-                >
-
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Subject</label>
+        <div class="search-box">
 
             <input
                 type="text"
-                placeholder="Enter subject"
-                required
+                id="searchInput"
+                placeholder="Enter station name or city..."
             >
 
-        </div>
-
-
-        <div class="form-group">
-
-            <label>Message</label>
-
-            <textarea
-                rows="6"
-                placeholder="Write your message..."
-                required
-            ></textarea>
+            <button onclick="searchStation()">
+                Search
+            </button>
 
         </div>
 
 
-        <button
-            type="submit"
-            class="submit-button"
-        >
-            Send Message
-        </button>
-
-    </form>
-
-</section>
+        <div id="searchResult" class="search-result"></div>
 
 
-<!-- ================= FOOTER ================= -->
+        <div class="station-container">
 
-<footer>
+            <!-- Station 1 -->
 
-    <div class="footer-content">
+            <div class="station-card">
 
-        <div>
+                <div class="station-top">
+                    <span class="station-icon">⚡</span>
+                    <span class="available">Available</span>
+                </div>
 
-            <h3>⚡ VoltRoute</h3>
+                <h3>GreenCharge Station</h3>
+
+                <p>📍 Ahmedabad, Gujarat</p>
+
+                <p>🔌 4 Charging Points</p>
+
+                <p>⚡ Fast Charging Available</p>
+
+                <button
+                    class="station-btn"
+                    onclick="selectStation('GreenCharge Station')">
+                    Select Station
+                </button>
+
+            </div>
+
+
+            <!-- Station 2 -->
+
+            <div class="station-card">
+
+                <div class="station-top">
+                    <span class="station-icon">🔋</span>
+                    <span class="available">Available</span>
+                </div>
+
+                <h3>EcoVolt Charging Hub</h3>
+
+                <p>📍 Surat, Gujarat</p>
+
+                <p>🔌 6 Charging Points</p>
+
+                <p>⚡ Ultra Fast Charging</p>
+
+                <button
+                    class="station-btn"
+                    onclick="selectStation('EcoVolt Charging Hub')">
+                    Select Station
+                </button>
+
+            </div>
+
+
+            <!-- Station 3 -->
+
+            <div class="station-card">
+
+                <div class="station-top">
+                    <span class="station-icon">⚡</span>
+                    <span class="available">Available</span>
+                </div>
+
+                <h3>PowerDrive EV Point</h3>
+
+                <p>📍 Vadodara, Gujarat</p>
+
+                <p>🔌 3 Charging Points</p>
+
+                <p>⚡ Fast Charging Available</p>
+
+                <button
+                    class="station-btn"
+                    onclick="selectStation('PowerDrive EV Point')">
+                    Select Station
+                </button>
+
+            </div>
+
+
+            <!-- Station 4 -->
+
+            <div class="station-card">
+
+                <div class="station-top">
+                    <span class="station-icon">🔋</span>
+                    <span class="available">Available</span>
+                </div>
+
+                <h3>VoltWay Station</h3>
+
+                <p>📍 Rajkot, Gujarat</p>
+
+                <p>🔌 5 Charging Points</p>
+
+                <p>⚡ DC Fast Charging</p>
+
+                <button
+                    class="station-btn"
+                    onclick="selectStation('VoltWay Station')">
+                    Select Station
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BOOKING ================= -->
+
+    <section id="booking" class="booking-section">
+
+        <div class="section-heading">
+
+            <p class="small-title">RESERVE YOUR SLOT</p>
+
+            <h2>Book Your Charging Slot</h2>
 
             <p>
-                Smart EV Charging System
+                Enter your details and reserve a charging slot.
             </p>
 
         </div>
 
 
-        <div>
+        <div class="booking-container">
+
+            <form id="bookingForm">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="vehicle">
+                        EV Model
+                    </label>
+
+                    <input
+                        type="text"
+                        id="vehicle"
+                        placeholder="Example: Tata Nexon EV"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="station">
+                        Charging Station
+                    </label>
+
+                    <select id="station" required>
+
+                        <option value="">
+                            Select Station
+                        </option>
+
+                        <option value="GreenCharge Station">
+                            GreenCharge Station
+                        </option>
+
+                        <option value="EcoVolt Charging Hub">
+                            EcoVolt Charging Hub
+                        </option>
+
+                        <option value="PowerDrive EV Point">
+                            PowerDrive EV Point
+                        </option>
+
+                        <option value="VoltWay Station">
+                            VoltWay Station
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="date">
+                            Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="date"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="time">
+                            Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="time"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="duration">
+                        Charging Duration
+                    </label>
+
+                    <select id="duration">
+
+                        <option value="1">
+                            1 Hour
+                        </option>
+
+                        <option value="2">
+                            2 Hours
+                        </option>
+
+                        <option value="3">
+                            3 Hours
+                        </option>
+
+                        <option value="4">
+                            4 Hours
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="book-btn">
+                    Confirm Booking
+                </button>
+
+            </form>
+
+
+            <div class="booking-info">
+
+                <div class="info-icon">⚡</div>
+
+                <h3>Why Book With VoltRoute?</h3>
+
+                <ul>
+                    <li>✓ Easy online booking</li>
+                    <li>✓ Check station availability</li>
+                    <li>✓ Save charging time</li>
+                    <li>✓ Fast charging options</li>
+                    <li>✓ Digital booking confirmation</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= COST CALCULATOR ================= -->
+
+    <section class="calculator-section">
+
+        <div class="section-heading">
+
+            <p class="small-title">CHARGING COST</p>
+
+            <h2>Calculate Charging Cost</h2>
 
             <p>
-                Charge Smarter. Drive Further. ⚡
+                Estimate the cost of charging your electric vehicle.
             </p>
 
         </div>
 
-    </div>
+
+        <div class="calculator">
+
+            <div class="form-group">
+
+                <label for="battery">
+                    Battery Capacity (kWh)
+                </label>
+
+                <input
+                    type="number"
+                    id="battery"
+                    placeholder="Example: 40"
+                    min="1"
+                >
+
+            </div>
 
 
-    <div class="footer-bottom">
+            <div class="form-group">
+
+                <label for="percentage">
+                    Current Battery (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="percentage"
+                    placeholder="Example: 20"
+                    min="0"
+                    max="100"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="target">
+                    Target Battery (%)
+                </label>
+
+                <input
+                    type="number"
+                    id="target"
+                    placeholder="Example: 80"
+                    min="1"
+                    max="100"
+                >
+
+            </div>
+
+
+            <button
+                onclick="calculateCost()"
+                class="calculate-btn">
+                Calculate Cost
+            </button>
+
+
+            <div id="costResult" class="cost-result"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURES ================= -->
+
+    <section id="features" class="section">
+
+        <div class="section-heading">
+
+            <p class="small-title">OUR FEATURES</p>
+
+            <h2>Everything You Need</h2>
+
+            <p>
+                VoltRoute makes EV charging convenient and efficient.
+            </p>
+
+        </div>
+
+
+        <div class="features-container">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📍</div>
+
+                <h3>Find Stations</h3>
+
+                <p>
+                    Easily search and find EV charging stations
+                    according to your location.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">📅</div>
+
+                <h3>Easy Booking</h3>
+
+                <p>
+                    Reserve your preferred charging slot
+                    without waiting.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">💰</div>
+
+                <h3>Cost Calculator</h3>
+
+                <p>
+                    Calculate an estimated charging cost
+                    before charging your EV.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🌱</div>
+
+                <h3>Eco Friendly</h3>
+
+                <p>
+                    Promote electric mobility and contribute
+                    to a cleaner environment.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact" class="contact-section">
+
+        <div class="contact-content">
+
+            <p class="small-title">GET IN TOUCH</p>
+
+            <h2>Drive Electric. Charge Smart.</h2>
+
+            <p>
+                Have questions about EV charging?
+                Contact the VoltRoute team.
+            </p>
+
+            <div class="contact-details">
+
+                <p>📧 support@voltroute.com</p>
+
+                <p>📞 +91 98765 43210</p>
+
+                <p>📍 Gujarat, India</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="footer-logo">
+            ⚡ VoltRoute
+        </div>
+
+        <p>
+            Smart EV Charging System
+        </p>
 
         <p>
             © 2026 VoltRoute. All Rights Reserved.
         </p>
 
-        <p>
-            Presented By <strong>Dhara Dasadiya</strong>
-        </p>
-
-    </div>
-
-</footer>
+    </footer>
 
 
-<!-- ================= JAVASCRIPT ================= -->
+    <!-- ================= JAVASCRIPT ================= -->
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
 </html>
