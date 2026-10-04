@@ -1,3 +1,4 @@
+```javascript
 /* =====================================================
    VOLTROUTE - SMART EV CHARGING SYSTEM
    JAVASCRIPT
@@ -8,161 +9,266 @@
 
 function searchStation() {
 
-    const input = document.getElementById("searchInput");
+    const input =
+        document.getElementById("searchInput");
 
-    const result = document.getElementById("searchResult");
+    const result =
+        document.getElementById("searchResult");
 
-    const searchText = input.value.trim().toLowerCase();
+    const searchText =
+        input.value.trim().toLowerCase();
 
 
+    // Check empty search
     if (searchText === "") {
 
-        result.innerText =
-            "Please enter a city or area name.";
+        result.innerHTML =
+            "⚠️ Please enter a station name or city.";
+
+        result.style.color = "orange";
 
         return;
     }
 
 
-    if (
-        searchText.includes("ahmedabad") ||
-        searchText.includes("sg highway") ||
-        searchText.includes("prahlad nagar") ||
-        searchText.includes("satellite")
-    ) {
+    // Charging station data
+    const stations = [
 
-        result.innerText =
-            "Charging stations found! Scroll down to view available stations.";
+        {
+            name: "GreenCharge Station",
+            city: "Ahmedabad",
+            status: "Available"
+        },
+
+        {
+            name: "EcoVolt Charging Hub",
+            city: "Surat",
+            status: "Available"
+        },
+
+        {
+            name: "PowerDrive EV Point",
+            city: "Vadodara",
+            status: "Available"
+        },
+
+        {
+            name: "VoltWay Station",
+            city: "Rajkot",
+            status: "Available"
+        }
+
+    ];
+
+
+    // Search station
+    const foundStation =
+        stations.find(function(station) {
+
+            return (
+                station.name
+                    .toLowerCase()
+                    .includes(searchText)
+
+                ||
+
+                station.city
+                    .toLowerCase()
+                    .includes(searchText)
+            );
+
+        });
+
+
+    // Display search result
+    if (foundStation) {
+
+        result.innerHTML =
+            "✅ " +
+            foundStation.name +
+            " found in " +
+            foundStation.city +
+            ". Status: " +
+            foundStation.status;
+
+        result.style.color = "#159447";
 
     } else {
 
-        result.innerText =
-            "Sorry, no charging station found for this location.";
+        result.innerHTML =
+            "❌ No charging station found for \"" +
+            input.value +
+            "\".";
+
+        result.style.color = "red";
+
     }
 
 }
 
 
-/* ================= VIEW STATION ================= */
+/* ================= SELECT STATION ================= */
 
-function viewStation(stationName) {
+function selectStation(stationName) {
 
-    alert(
-        "Station: " + stationName +
-        "\n\n" +
-        "Charging Station Details" +
-        "\nPower: Available" +
-        "\nConnector: EV Compatible" +
-        "\nStatus: Available" +
-        "\n\n" +
-        "Thank you for using VoltRoute!"
-    );
-
-}
+    const stationSelect =
+        document.getElementById("station");
 
 
-/* ================= QR CODE ================= */
+    // Automatically select station
+    stationSelect.value = stationName;
 
-function showQR() {
 
-    alert(
-        "VoltRoute Charging Station QR" +
-        "\n\n" +
-        "Station ID: EV-AHD-001" +
-        "\nLocation: SG Highway, Ahmedabad" +
-        "\nPower: 60 kW" +
-        "\nConnector: CCS2" +
-        "\nPorts: 4" +
-        "\n\n" +
-        "Scan → Check Details → Start Charging → Pay"
-    );
+    // Scroll to booking section
+    document.getElementById("booking")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
 
-/* ================= PAYMENT ================= */
+/* ================= BOOKING FORM ================= */
 
-function paymentDemo() {
-
-    alert(
-        "Payment Successful! ✅" +
-        "\n\n" +
-        "Amount: ₹300" +
-        "\nStation: Ahmedabad EV Hub" +
-        "\nEnergy Used: 25 kWh" +
-        "\n\n" +
-        "Thank you for using VoltRoute."
-    );
-
-}
+const bookingForm =
+    document.getElementById("bookingForm");
 
 
-/* ================= FIRE EMERGENCY ================= */
+bookingForm.addEventListener(
+    "submit",
+    function(event) {
 
-function fireEmergency() {
-
-    alert(
-        "🔥 FIRE EMERGENCY" +
-        "\n\n" +
-        "1. Stop charging immediately." +
-        "\n2. Move away from the charging area." +
-        "\n3. Do not touch electrical equipment." +
-        "\n4. Contact emergency services." +
-        "\n\n" +
-        "Emergency Number: 112"
-    );
-
-}
+        // Stop page refresh
+        event.preventDefault();
 
 
-/* ================= ELECTRICAL EMERGENCY ================= */
+        // Get form values
+        const name =
+            document.getElementById("name").value;
 
-function electricalEmergency() {
+        const email =
+            document.getElementById("email").value;
 
-    alert(
-        "⚠️ ELECTRICAL EMERGENCY" +
-        "\n\n" +
-        "Stop using the charging station." +
-        "\nDo not touch damaged cables." +
-        "\nMove to a safe area." +
-        "\nControl room has been notified. (Demo)"
-    );
+        const vehicle =
+            document.getElementById("vehicle").value;
 
-}
+        const station =
+            document.getElementById("station").value;
 
+        const date =
+            document.getElementById("date").value;
 
-/* ================= CONTROL ROOM ================= */
+        const time =
+            document.getElementById("time").value;
 
-function contactControl() {
-
-    alert(
-        "📞 VOLTROUTE CONTROL ROOM" +
-        "\n\n" +
-        "Support Number: +91 98765 43210" +
-        "\n\n" +
-        "For immediate danger, contact emergency services."
-    );
-
-}
+        const duration =
+            document.getElementById("duration").value;
 
 
-/* ================= CONTACT FORM ================= */
+        // Validate form
+        if (
+            name === "" ||
+            email === "" ||
+            vehicle === "" ||
+            station === "" ||
+            date === "" ||
+            time === ""
+        ) {
 
-function contactMessage(event) {
+            alert(
+                "Please fill all required fields."
+            );
 
-    event.preventDefault();
-
-    alert(
-        "Message sent successfully! ✅" +
-        "\n\n" +
-        "Thank you for contacting VoltRoute."
-    );
-
-}
+            return;
+        }
 
 
-/* ================= PAGE LOADED ================= */
+        // Booking confirmation
+        alert(
+            "⚡ Booking Confirmed!\n\n" +
 
-console.log(
-    "VoltRoute Smart EV Charging System Loaded Successfully ⚡"
+            "Name: " +
+            name +
+
+            "\nVehicle: " +
+            vehicle +
+
+            "\nStation: " +
+            station +
+
+            "\nDate: " +
+            date +
+
+            "\nTime: " +
+            time +
+
+            "\nDuration: " +
+            duration +
+            " Hour(s)"
+        );
+
+
+        // Clear form
+        bookingForm.reset();
+
+    }
 );
+
+
+/* ================= CHARGING COST CALCULATOR ================= */
+
+function calculateCost() {
+
+    // Get battery capacity
+    const battery =
+        parseFloat(
+            document.getElementById("battery").value
+        );
+
+
+    // Get current battery percentage
+    const current =
+        parseFloat(
+            document.getElementById("percentage").value
+        );
+
+
+    // Get target battery percentage
+    const target =
+        parseFloat(
+            document.getElementById("target").value
+        );
+
+
+    // Result element
+    const result =
+        document.getElementById("costResult");
+
+
+    // Check empty values
+    if (
+        isNaN(battery) ||
+        isNaN(current) ||
+        isNaN(target)
+    ) {
+
+        result.innerHTML =
+            "⚠️ Please enter all values.";
+
+        result.style.color = "orange";
+
+        return;
+    }
+
+
+    // Check valid values
+    if (
+        battery <= 0 ||
+        current < 0 ||
+        current > 100 ||
+        target <= 0 ||
+        target > 100
+    ) {
+
+        result.innerHTML =
+```
