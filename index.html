@@ -4,641 +4,822 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>VoltRoute - Smart EV Charging System</title>
+    <title>VoltRoute | Smart EV Charging</title>
 
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<!-- ================= HEADER ================= -->
 
-    <header class="navbar">
+<header class="header">
 
-        <div class="logo">
-            ⚡ VoltRoute
-        </div>
+    <div class="container nav">
 
-        <nav>
+        <a href="#home" class="logo">
+            <span class="logo-icon">⚡</span>
+            <span>Volt<span>Route</span></span>
+        </a>
+
+        <nav class="nav-links">
+
             <a href="#home">Home</a>
             <a href="#stations">Stations</a>
             <a href="#booking">Booking</a>
-            <a href="#features">Features</a>
-            <a href="#contact">Contact</a>
+            <a href="#calculator">Calculator</a>
+            <a href="#emergency">Emergency</a>
+
         </nav>
 
-    </header>
+        <div class="nav-user">
+
+            <button class="location-small-btn"
+                    onclick="getLiveLocation()">
+                📍 <span>Live Location</span>
+            </button>
+
+            <button class="login-btn" id="navLoginBtn"
+                    onclick="openLogin()">
+                Login
+            </button>
+
+            <div class="user-menu hidden" id="userMenu">
+
+                <button class="profile-btn" onclick="toggleProfileMenu()">
+                    <span id="userAvatar">D</span>
+                    <span id="navUserName">User</span>
+                    ▾
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown">
+
+                    <div class="profile-info">
+                        <strong id="profileName">User</strong>
+                        <small id="profileEmail">user@email.com</small>
+                    </div>
+
+                    <button onclick="scrollToBookings()">
+                        📋 My Bookings
+                    </button>
+
+                    <button onclick="logout()">
+                        🚪 Logout
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <button class="mobile-menu" onclick="toggleMobileMenu()">
+            ☰
+        </button>
+
+    </div>
+
+</header>
 
 
-    <!-- ================= HOME ================= -->
+<!-- ================= HERO ================= -->
 
-    <section id="home" class="hero">
+<section class="hero" id="home">
+
+    <div class="container hero-grid">
 
         <div class="hero-content">
 
-            <p class="tagline">SMART • FAST • ECO-FRIENDLY</p>
+            <div class="hero-badge">
+                <span class="pulse-dot"></span>
+                Smart EV Charging Network
+            </div>
 
             <h1>
-                Smart EV Charging<br>
-                Made <span>Simple</span>
+                Charge Smarter.
+                <span>Drive Further.</span>
             </h1>
 
             <p>
                 Find nearby EV charging stations, check availability,
                 calculate charging cost and reserve your charging slot
-                with VoltRoute.
+                from one simple platform.
             </p>
 
             <div class="hero-buttons">
-                <a href="#stations" class="btn">Find Charging Station</a>
-                <a href="#booking" class="btn secondary">Book a Slot</a>
+
+                <button class="primary-btn"
+                        onclick="getLiveLocation()">
+                    📍 Find Charger Near Me
+                </button>
+
+                <button class="secondary-btn"
+                        onclick="scrollToStations()">
+                    Explore Stations →
+                </button>
+
+            </div>
+
+            <div class="hero-trust">
+
+                <div>
+                    <strong>24/7</strong>
+                    <span>Charging Support</span>
+                </div>
+
+                <div>
+                    <strong>120 kW</strong>
+                    <span>Fast Charging</span>
+                </div>
+
+                <div>
+                    <strong>100%</strong>
+                    <span>Digital Booking</span>
+                </div>
+
             </div>
 
         </div>
 
+
+        <!-- Hero Card -->
+
         <div class="hero-card">
+
+            <div class="hero-card-top">
+
+                <span>⚡ VOLTROUTE</span>
+
+                <span class="live-status">
+                    <span></span> LIVE
+                </span>
+
+            </div>
 
             <div class="car-icon">
                 🚗⚡
             </div>
 
-            <h2>EV Charging</h2>
+            <h3>Find Your Nearest Charger</h3>
 
-            <p>Power your journey with clean energy.</p>
+            <p id="locationStatus">
+                Location not detected yet.
+            </p>
 
-            <div class="charging-status">
-                <span class="dot"></span>
-                Charging Stations Available
+            <button class="location-btn"
+                    onclick="getLiveLocation()">
+                📍 Use My Current Location
+            </button>
+
+            <div class="location-details hidden" id="locationDetails">
+
+                <div>
+                    <small>Latitude</small>
+                    <strong id="latitude">--</strong>
+                </div>
+
+                <div>
+                    <small>Longitude</small>
+                    <strong id="longitude">--</strong>
+                </div>
+
+                <div>
+                    <small>Accuracy</small>
+                    <strong id="accuracy">--</strong>
+                </div>
+
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= STATISTICS ================= -->
+<!-- ================= DASHBOARD STATS ================= -->
 
-    <section class="stats">
+<section class="stats-section">
+
+    <div class="container stats-grid">
 
         <div class="stat-card">
-            <h2>50+</h2>
-            <p>Charging Stations</p>
+            <div class="stat-icon green">⚡</div>
+            <div>
+                <strong>120 kW</strong>
+                <span>Max Charging Power</span>
+            </div>
         </div>
 
         <div class="stat-card">
-            <h2>120+</h2>
-            <p>Charging Points</p>
+            <div class="stat-icon blue">🔌</div>
+            <div>
+                <strong>13+</strong>
+                <span>Charging Ports</span>
+            </div>
         </div>
 
         <div class="stat-card">
-            <h2>24/7</h2>
-            <p>Service Available</p>
+            <div class="stat-icon purple">📍</div>
+            <div>
+                <strong>Ahmedabad</strong>
+                <span>Current Service Area</span>
+            </div>
         </div>
 
         <div class="stat-card">
-            <h2>100%</h2>
-            <p>Digital Booking</p>
+            <div class="stat-icon orange">🛡️</div>
+            <div>
+                <strong>24/7</strong>
+                <span>Safety Support</span>
+            </div>
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= STATIONS ================= -->
+<!-- ================= LOCATION ================= -->
 
-    <section id="stations" class="section">
+<section class="location-section">
+
+    <div class="container">
 
         <div class="section-heading">
 
-            <p class="small-title">FIND A STATION</p>
+            <span class="section-label">LIVE LOCATION</span>
 
-            <h2>Nearby Charging Stations</h2>
+            <h2>
+                Find Chargers <span>Near You</span>
+            </h2>
 
             <p>
-                Search for your preferred charging station
-                and check its availability.
+                Allow location access and VoltRoute will calculate
+                the distance to available charging stations.
             </p>
 
         </div>
 
 
-        <div class="search-box">
+        <div class="location-panel">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Enter station name or city..."
-            >
+            <div class="location-main">
 
-            <button onclick="searchStation()">
-                Search
+                <div class="big-location-icon">
+                    📍
+                </div>
+
+                <div>
+
+                    <h3 id="locationTitle">
+                        Your location is not active
+                    </h3>
+
+                    <p id="locationMessage">
+                        Click the button to detect your current location.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <button class="primary-btn"
+                    onclick="getLiveLocation()">
+                Enable Live Location
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= STATIONS ================= -->
+
+<section class="stations-section" id="stations">
+
+    <div class="container">
+
+        <div class="section-heading row-heading">
+
+            <div>
+
+                <span class="section-label">CHARGING NETWORK</span>
+
+                <h2>
+                    Nearby <span>Charging Stations</span>
+                </h2>
+
+                <p id="stationResultText">
+                    Showing available demo charging stations.
+                </p>
+
+            </div>
+
+            <button class="outline-btn"
+                    onclick="sortNearest()">
+                📍 Sort By Distance
             </button>
 
         </div>
 
 
-        <div id="searchResult" class="search-result"></div>
+        <!-- Search -->
 
+        <div class="search-box">
 
-        <div class="station-container">
+            <input type="text"
+                   id="stationSearch"
+                   placeholder="Search station, area or connector..."
+                   oninput="renderStations()">
 
-            <!-- Station 1 -->
+            <select id="speedFilter"
+                    onchange="renderStations()">
 
-            <div class="station-card">
+                <option value="all">All Charging Speeds</option>
+                <option value="fast">Fast Charging</option>
+                <option value="normal">Normal Charging</option>
 
-                <div class="station-top">
-                    <span class="station-icon">⚡</span>
-                    <span class="available">Available</span>
-                </div>
+            </select>
 
-                <h3>GreenCharge Station</h3>
-
-                <p>📍 Ahmedabad, Gujarat</p>
-
-                <p>🔌 4 Charging Points</p>
-
-                <p>⚡ Fast Charging Available</p>
-
-                <button
-                    class="station-btn"
-                    onclick="selectStation('GreenCharge Station')">
-                    Select Station
-                </button>
-
-            </div>
-
-
-            <!-- Station 2 -->
-
-            <div class="station-card">
-
-                <div class="station-top">
-                    <span class="station-icon">🔋</span>
-                    <span class="available">Available</span>
-                </div>
-
-                <h3>EcoVolt Charging Hub</h3>
-
-                <p>📍 Surat, Gujarat</p>
-
-                <p>🔌 6 Charging Points</p>
-
-                <p>⚡ Ultra Fast Charging</p>
-
-                <button
-                    class="station-btn"
-                    onclick="selectStation('EcoVolt Charging Hub')">
-                    Select Station
-                </button>
-
-            </div>
-
-
-            <!-- Station 3 -->
-
-            <div class="station-card">
-
-                <div class="station-top">
-                    <span class="station-icon">⚡</span>
-                    <span class="available">Available</span>
-                </div>
-
-                <h3>PowerDrive EV Point</h3>
-
-                <p>📍 Vadodara, Gujarat</p>
-
-                <p>🔌 3 Charging Points</p>
-
-                <p>⚡ Fast Charging Available</p>
-
-                <button
-                    class="station-btn"
-                    onclick="selectStation('PowerDrive EV Point')">
-                    Select Station
-                </button>
-
-            </div>
-
-
-            <!-- Station 4 -->
-
-            <div class="station-card">
-
-                <div class="station-top">
-                    <span class="station-icon">🔋</span>
-                    <span class="available">Available</span>
-                </div>
-
-                <h3>VoltWay Station</h3>
-
-                <p>📍 Rajkot, Gujarat</p>
-
-                <p>🔌 5 Charging Points</p>
-
-                <p>⚡ DC Fast Charging</p>
-
-                <button
-                    class="station-btn"
-                    onclick="selectStation('VoltWay Station')">
-                    Select Station
-                </button>
-
-            </div>
+            <button onclick="renderStations()">
+                🔎 Search
+            </button>
 
         </div>
 
-    </section>
+
+        <!-- Station Cards -->
+
+        <div class="stations-grid"
+             id="stationsGrid">
+        </div>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= BOOKING ================= -->
+<!-- ================= BOOKING ================= -->
 
-    <section id="booking" class="booking-section">
+<section class="booking-section" id="booking">
 
-        <div class="section-heading">
+    <div class="container booking-grid">
 
-            <p class="small-title">RESERVE YOUR SLOT</p>
+        <div class="booking-info">
 
-            <h2>Book Your Charging Slot</h2>
+            <span class="section-label">SMART BOOKING</span>
+
+            <h2>
+                Reserve Your
+                <span>Charging Slot</span>
+            </h2>
 
             <p>
-                Enter your details and reserve a charging slot.
+                Select a station, date, time and charging duration.
+                Your booking will be stored in your account.
             </p>
+
+            <div class="booking-features">
+
+                <div>
+                    <span>✓</span>
+                    Select charging station
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Choose charging duration
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Calculate estimated cost
+                </div>
+
+                <div>
+                    <span>✓</span>
+                    Get booking ID
+                </div>
+
+            </div>
 
         </div>
 
 
-        <div class="booking-container">
+        <div class="booking-card">
+
+            <h3>Book Charging Slot</h3>
 
             <form id="bookingForm">
 
-                <div class="form-group">
+                <label>Charging Station</label>
 
-                    <label for="name">
-                        Full Name
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Enter your name"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        id="email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="vehicle">
-                        EV Model
-                    </label>
-
-                    <input
-                        type="text"
-                        id="vehicle"
-                        placeholder="Example: Tata Nexon EV"
-                        required
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="station">
-                        Charging Station
-                    </label>
-
-                    <select id="station" required>
-
-                        <option value="">
-                            Select Station
-                        </option>
-
-                        <option value="GreenCharge Station">
-                            GreenCharge Station
-                        </option>
-
-                        <option value="EcoVolt Charging Hub">
-                            EcoVolt Charging Hub
-                        </option>
-
-                        <option value="PowerDrive EV Point">
-                            PowerDrive EV Point
-                        </option>
-
-                        <option value="VoltWay Station">
-                            VoltWay Station
-                        </option>
-
-                    </select>
-
-                </div>
+                <select id="bookingStation" required>
+                    <option value="">Select Station</option>
+                </select>
 
 
                 <div class="form-row">
 
-                    <div class="form-group">
-
-                        <label for="date">
-                            Date
-                        </label>
-
-                        <input
-                            type="date"
-                            id="date"
-                            required
-                        >
-
+                    <div>
+                        <label>Date</label>
+                        <input type="date"
+                               id="bookingDate"
+                               required>
                     </div>
 
-
-                    <div class="form-group">
-
-                        <label for="time">
-                            Time
-                        </label>
-
-                        <input
-                            type="time"
-                            id="time"
-                            required
-                        >
-
+                    <div>
+                        <label>Time</label>
+                        <input type="time"
+                               id="bookingTime"
+                               required>
                     </div>
 
                 </div>
 
 
-                <div class="form-group">
+                <label>Charging Duration</label>
 
-                    <label for="duration">
-                        Charging Duration
-                    </label>
+                <select id="bookingDuration">
 
-                    <select id="duration">
+                    <option value="30">30 Minutes</option>
+                    <option value="60">1 Hour</option>
+                    <option value="90">1.5 Hours</option>
+                    <option value="120">2 Hours</option>
 
-                        <option value="1">
-                            1 Hour
-                        </option>
+                </select>
 
-                        <option value="2">
-                            2 Hours
-                        </option>
 
-                        <option value="3">
-                            3 Hours
-                        </option>
+                <div class="booking-summary">
 
-                        <option value="4">
-                            4 Hours
-                        </option>
+                    <span>Estimated Cost</span>
 
-                    </select>
+                    <strong id="bookingPrice">
+                        ₹150
+                    </strong>
 
                 </div>
 
 
-                <button
-                    type="submit"
-                    class="book-btn">
-                    Confirm Booking
+                <button class="primary-btn full-btn"
+                        type="submit">
+                    ⚡ Confirm Booking
                 </button>
 
             </form>
 
-
-            <div class="booking-info">
-
-                <div class="info-icon">⚡</div>
-
-                <h3>Why Book With VoltRoute?</h3>
-
-                <ul>
-                    <li>✓ Easy online booking</li>
-                    <li>✓ Check station availability</li>
-                    <li>✓ Save charging time</li>
-                    <li>✓ Fast charging options</li>
-                    <li>✓ Digital booking confirmation</li>
-                </ul>
-
-            </div>
-
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= COST CALCULATOR ================= -->
+<!-- ================= MY BOOKINGS ================= -->
 
-    <section class="calculator-section">
+<section class="my-bookings-section">
 
-        <div class="section-heading">
+    <div class="container">
 
-            <p class="small-title">CHARGING COST</p>
+        <div class="section-heading row-heading">
 
-            <h2>Calculate Charging Cost</h2>
+            <div>
 
-            <p>
-                Estimate the cost of charging your electric vehicle.
-            </p>
+                <span class="section-label">USER DASHBOARD</span>
 
-        </div>
+                <h2>
+                    My <span>Bookings</span>
+                </h2>
 
-
-        <div class="calculator">
-
-            <div class="form-group">
-
-                <label for="battery">
-                    Battery Capacity (kWh)
-                </label>
-
-                <input
-                    type="number"
-                    id="battery"
-                    placeholder="Example: 40"
-                    min="1"
-                >
+                <p>
+                    Your recent charging reservations.
+                </p>
 
             </div>
 
-
-            <div class="form-group">
-
-                <label for="percentage">
-                    Current Battery (%)
-                </label>
-
-                <input
-                    type="number"
-                    id="percentage"
-                    placeholder="Example: 20"
-                    min="0"
-                    max="100"
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="target">
-                    Target Battery (%)
-                </label>
-
-                <input
-                    type="number"
-                    id="target"
-                    placeholder="Example: 80"
-                    min="1"
-                    max="100"
-                >
-
-            </div>
-
-
-            <button
-                onclick="calculateCost()"
-                class="calculate-btn">
-                Calculate Cost
+            <button class="outline-btn"
+                    onclick="scrollToBookingForm()">
+                + New Booking
             </button>
 
+        </div>
 
-            <div id="costResult" class="cost-result"></div>
+        <div id="bookingsList"
+             class="bookings-list">
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CALCULATOR ================= -->
+
+<section class="calculator-section"
+         id="calculator">
+
+    <div class="container calculator-grid">
+
+        <div>
+
+            <span class="section-label">COST CALCULATOR</span>
+
+            <h2>
+                Calculate Your
+                <span>Charging Cost</span>
+            </h2>
+
+            <p>
+                Estimate your EV charging cost before starting
+                your charging session.
+            </p>
+
+            <div class="calculator-note">
+                💡 Average demo rate:
+                <strong>₹12 per kWh</strong>
+            </div>
 
         </div>
 
-    </section>
+
+        <div class="calculator-card">
+
+            <div class="input-group">
+
+                <label>Battery Capacity</label>
+
+                <input type="number"
+                       id="batteryCapacity"
+                       value="50"
+                       min="1"
+                       oninput="calculateCost()">
+
+                <span>kWh</span>
+
+            </div>
 
 
-    <!-- ================= FEATURES ================= -->
+            <div class="input-group">
 
-    <section id="features" class="section">
+                <label>Current Battery Level</label>
+
+                <input type="number"
+                       id="currentBattery"
+                       value="20"
+                       min="0"
+                       max="100"
+                       oninput="calculateCost()">
+
+                <span>%</span>
+
+            </div>
+
+
+            <div class="input-group">
+
+                <label>Charging Target</label>
+
+                <input type="number"
+                       id="targetBattery"
+                       value="80"
+                       min="1"
+                       max="100"
+                       oninput="calculateCost()">
+
+                <span>%</span>
+
+            </div>
+
+
+            <div class="cost-result">
+
+                <div>
+                    <small>Energy Required</small>
+                    <strong id="energyRequired">
+                        30 kWh
+                    </strong>
+                </div>
+
+                <div>
+                    <small>Estimated Cost</small>
+                    <strong id="estimatedCost">
+                        ₹360
+                    </strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features-section">
+
+    <div class="container">
 
         <div class="section-heading">
 
-            <p class="small-title">OUR FEATURES</p>
+            <span class="section-label">WHY VOLTROUTE</span>
 
-            <h2>Everything You Need</h2>
-
-            <p>
-                VoltRoute makes EV charging convenient and efficient.
-            </p>
+            <h2>
+                Everything You Need
+                <span>For EV Charging</span>
+            </h2>
 
         </div>
 
 
-        <div class="features-container">
+        <div class="features-grid">
 
             <div class="feature-card">
-
-                <div class="feature-icon">📍</div>
-
-                <h3>Find Stations</h3>
-
+                <div>📍</div>
+                <h3>Live Location</h3>
                 <p>
-                    Easily search and find EV charging stations
-                    according to your location.
+                    Find nearby charging stations using your
+                    device's current location.
                 </p>
-
             </div>
 
+            <div class="feature-card">
+                <div>⚡</div>
+                <h3>Fast Charging</h3>
+                <p>
+                    Identify high-power stations for faster
+                    EV charging.
+                </p>
+            </div>
 
             <div class="feature-card">
-
-                <div class="feature-icon">📅</div>
-
+                <div>📅</div>
                 <h3>Easy Booking</h3>
+                <p>
+                    Reserve your charging slot before reaching
+                    the station.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div>💳</div>
+                <h3>Digital Payment</h3>
+                <p>
+                    Calculate your amount and use the demo
+                    payment interface.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div>🔐</div>
+                <h3>User Account</h3>
+                <p>
+                    Login and manage your charging bookings
+                    from your profile.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div>🚨</div>
+                <h3>Emergency Support</h3>
+                <p>
+                    Quick access to emergency and safety
+                    information.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EMERGENCY ================= -->
+
+<section class="emergency-section"
+         id="emergency">
+
+    <div class="container">
+
+        <div class="emergency-card">
+
+            <div class="emergency-icon">
+                🚨
+            </div>
+
+            <div class="emergency-content">
+
+                <span>EMERGENCY & SAFETY</span>
+
+                <h2>
+                    Charging Safety Comes First
+                </h2>
 
                 <p>
-                    Reserve your preferred charging slot
-                    without waiting.
+                    In case of fire, electrical fault or emergency,
+                    stop charging and contact the appropriate
+                    emergency service.
                 </p>
 
             </div>
 
+            <div class="emergency-actions">
 
-            <div class="feature-card">
+                <a href="tel:112"
+                   class="emergency-btn">
+                    📞 Call 112
+                </a>
 
-                <div class="feature-icon">💰</div>
-
-                <h3>Cost Calculator</h3>
-
-                <p>
-                    Calculate an estimated charging cost
-                    before charging your EV.
-                </p>
-
-            </div>
-
-
-            <div class="feature-card">
-
-                <div class="feature-icon">🌱</div>
-
-                <h3>Eco Friendly</h3>
-
-                <p>
-                    Promote electric mobility and contribute
-                    to a cleaner environment.
-                </p>
+                <button onclick="showEmergencyTips()"
+                        class="outline-light-btn">
+                    Safety Tips
+                </button>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
-    <!-- ================= CONTACT ================= -->
+<!-- ================= CONTACT ================= -->
 
-    <section id="contact" class="contact-section">
+<section class="contact-section">
 
-        <div class="contact-content">
+    <div class="container contact-grid">
 
-            <p class="small-title">GET IN TOUCH</p>
+        <div>
 
-            <h2>Drive Electric. Charge Smart.</h2>
+            <span class="section-label">CONTACT</span>
+
+            <h2>
+                Have a Question?
+            </h2>
 
             <p>
-                Have questions about EV charging?
-                Contact the VoltRoute team.
+                Send us your feedback or query about VoltRoute.
             </p>
 
-            <div class="contact-details">
-
-                <p>📧 support@voltroute.com</p>
-
-                <p>📞 +91 98765 43210</p>
-
-                <p>📍 Gujarat, India</p>
-
+            <div class="contact-info">
+                <p>📧 support@voltroute.demo</p>
+                <p>📍 Ahmedabad, Gujarat</p>
+                <p>⚡ Smart EV Charging System</p>
             </div>
 
         </div>
 
-    </section>
+
+        <form class="contact-form"
+              onsubmit="submitContact(event)">
+
+            <input type="text"
+                   placeholder="Your Name"
+                   required>
+
+            <input type="email"
+                   placeholder="Email Address"
+                   required>
+
+            <input type="text"
+                   placeholder="Subject"
+                   required>
+
+            <textarea rows="5"
+                      placeholder="Your Message"
+                      required></textarea>
+
+            <button class="primary-btn">
+                Send Message →
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
 
 
-    <!-- ================= FOOTER ================= -->
+<!-- ================= FOOTER ================= -->
 
-    <footer>
+<footer>
+
+    <div class="container footer-content">
 
         <div class="footer-logo">
             ⚡ VoltRoute
@@ -649,15 +830,150 @@
         </p>
 
         <p>
-            © 2026 VoltRoute. All Rights Reserved.
+            © 2026 VoltRoute | Presented By Dhara Dasadiya
         </p>
 
-    </footer>
+    </div>
+
+</footer>
 
 
-    <!-- ================= JAVASCRIPT ================= -->
+<!-- ================= LOGIN MODAL ================= -->
 
-    <script src="script.js"></script>
+<div class="modal-overlay hidden"
+     id="loginModal">
+
+    <div class="auth-modal">
+
+        <button class="close-modal"
+                onclick="closeLogin()">
+            ×
+        </button>
+
+        <div class="auth-logo">
+            ⚡
+        </div>
+
+        <h2 id="authTitle">
+            Welcome to VoltRoute
+        </h2>
+
+        <p id="authSubtitle">
+            Login to manage your EV charging bookings.
+        </p>
+
+
+        <form id="authForm">
+
+            <div id="signupNameGroup"
+                 class="hidden">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       id="signupName"
+                       placeholder="Enter your name">
+
+            </div>
+
+
+            <label>Email Address</label>
+
+            <input type="email"
+                   id="authEmail"
+                   placeholder="Enter email"
+                   required>
+
+
+            <label>Password</label>
+
+            <input type="password"
+                   id="authPassword"
+                   placeholder="Enter password"
+                   required>
+
+
+            <button class="primary-btn full-btn">
+                <span id="authButtonText">
+                    Login
+                </span>
+            </button>
+
+        </form>
+
+
+        <p class="auth-switch">
+
+            <span id="switchText">
+                Don't have an account?
+            </span>
+
+            <button onclick="toggleAuthMode()"
+                    id="switchAuthBtn">
+                Create Account
+            </button>
+
+        </p>
+
+        <small class="demo-warning">
+            Demo login for college project.
+            Data is stored only in this browser.
+        </small>
+
+    </div>
+
+</div>
+
+
+<!-- ================= BOOKING SUCCESS MODAL ================= -->
+
+<div class="modal-overlay hidden"
+     id="successModal">
+
+    <div class="success-modal">
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+        <h2>Booking Confirmed!</h2>
+
+        <p>
+            Your charging slot has been successfully reserved.
+        </p>
+
+        <div class="booking-id-box">
+
+            <span>Booking ID</span>
+
+            <strong id="generatedBookingId">
+                VR-000000
+            </strong>
+
+        </div>
+
+        <button class="primary-btn full-btn"
+                onclick="closeSuccessModal()">
+            Done
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast"
+     class="toast">
+</div>
+
+
+<script src="script.js"></script>
+
+<script>
+    lucide.createIcons();
+</script>
 
 </body>
 </html>
