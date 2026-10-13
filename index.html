@@ -2,92 +2,719 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description"
-          content="VoltRoute helps EV drivers find charging stations, check distances and book charging slots.">
+<title>EV Charge | Electric Vehicle Charging</title>
 
-    <title>VoltRoute | Smart EV Charging</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-    <!-- CSS FILE -->
-    <link rel="stylesheet" href="style.css">
+html {
+    scroll-behavior: smooth;
+}
 
-    <!-- JavaScript FILE -->
-    <script src="script.js" defer></script>
+body {
+    background: #07111f;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background: #0c192a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #20334b;
+}
+
+.logo {
+    color: #39f5a5;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 14px;
+}
+
+nav a:hover {
+    color: #39f5a5;
+}
+
+button, .btn {
+    border: none;
+    border-radius: 7px;
+    padding: 12px 18px;
+    background: #39f5a5;
+    color: #07111f;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+button:hover, .btn:hover {
+    background: #20d88a;
+}
+
+.hero {
+    padding: 90px 7%;
+    background:
+      radial-gradient(ellipse at 85% 40%, #134c47 0%, transparent 40%),
+      #07111f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    min-height: 440px;
+}
+
+.hero h1 {
+    font-size: clamp(35px, 5vw, 58px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+    color: #39f5a5;
+}
+
+.hero p {
+    color: #b4c3d5;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    max-width: 550px;
+}
+
+.hero-icon {
+    font-size: 150px;
+    text-align: center;
+    filter: drop-shadow(0 0 25px #39f5a555);
+}
+
+section {
+    padding: 65px 7%;
+}
+
+.section-title {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.section-desc {
+    color: #9bacc0;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.stats, .station-grid, .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: #101f32;
+    border: 1px solid #223650;
+    padding: 24px;
+    border-radius: 14px;
+}
+
+.card h3 {
+    margin: 12px 0;
+}
+
+.card p {
+    color: #b2c0d2;
+    line-height: 1.7;
+    margin: 8px 0;
+}
+
+.status {
+    color: #39f5a5;
+    font-weight: bold;
+}
+
+.status.busy {
+    color: #ffc15b;
+}
+
+.status.offline {
+    color: #ff7777;
+}
+
+#map {
+    width: 100%;
+    height: 380px;
+    border: 0;
+    border-radius: 12px;
+    background: #101f32;
+}
+
+.map-note {
+    color: #b2c0d2;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+
+.secondary {
+    background: transparent;
+    color: #39f5a5;
+    border: 1px solid #39f5a5;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 9px 0 15px;
+    background: #091626;
+    color: white;
+    border: 1px solid #34465d;
+    border-radius: 7px;
+}
+
+label {
+    color: #c9d5e4;
+}
+
+.form-box {
+    max-width: 500px;
+    margin: auto;
+    background: #101f32;
+    padding: 28px;
+    border-radius: 14px;
+    border: 1px solid #223650;
+}
+
+.form-box h3 {
+    margin-bottom: 20px;
+}
+
+#message {
+    margin-top: 15px;
+    color: #39f5a5;
+    line-height: 1.6;
+}
+
+.qr-box {
+    text-align: center;
+}
+
+.qr-box img {
+    width: 180px;
+    height: 180px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+}
+
+.emergency {
+    background: #321b25;
+    border: 1px solid #813d4e;
+}
+
+.emergency button {
+    background: #ff687b;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #0c192a;
+    color: #9bacc0;
+    line-height: 1.8;
+}
+
+@media (max-width: 850px) {
+    header {
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 14px;
+    }
+
+    nav a {
+        margin: 0;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .stats, .station-grid, .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-icon {
+        font-size: 100px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<header>
+    <div class="logo">⚡ EV CHARGE</div>
 
-    <header class="header">
-        <nav class="navbar container">
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#stations">Stations</a>
+        <a href="#map-section">Live Map</a>
+        <a href="#payment">Payment</a>
+        <a href="#login">Login</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
 
-            <a href="#home" class="logo">
-                <span class="logo-icon">⚡</span>
-                VoltRoute
-            </a>
+<!-- HOME -->
+<section class="hero" id="home">
+    <div>
+        <h1>Power Your Journey<br>With <span>Clean Energy.</span></h1>
 
-            <button
-                class="menu-toggle"
-                id="menuToggle"
-                type="button"
-                aria-label="Toggle navigation"
-                aria-expanded="false">
-                ☰
+        <p>
+            Find EV charging stations near you, check charger details,
+            explore available charging points and plan your next journey.
+        </p>
+
+        <a href="#stations" class="btn">Find Chargers ⚡</a>
+        <a href="#map-section" class="btn secondary">Explore Map</a>
+    </div>
+
+    <div class="hero-icon">🚘⚡</div>
+</section>
+
+<!-- STATS -->
+<section>
+    <h2 class="section-title">Your Charging Dashboard</h2>
+    <p class="section-desc">
+        Example data for the website demonstration.
+    </p>
+
+    <div class="stats">
+        <div class="card">
+            <h2>🔌 3</h2>
+            <p>Demo Charging Stations</p>
+        </div>
+
+        <div class="card">
+            <h2>⚡ 2</h2>
+            <p>Demo Available Chargers</p>
+        </div>
+
+        <div class="card">
+            <h2>🌱 100%</h2>
+            <p>Electric Mobility Focus</p>
+        </div>
+    </div>
+</section>
+
+<!-- STATIONS -->
+<section id="stations">
+    <h2 class="section-title">Nearby Charging Stations</h2>
+    <p class="section-desc">
+        Sample stations only. Availability and electrical values
+        must be connected to a real charger API.
+    </p>
+
+    <div class="station-grid">
+
+        <div class="card">
+            <h3>⚡ Green Energy Hub</h3>
+            <p>📍 Ahmedabad, Gujarat</p>
+            <p>Charger: DC Fast Charging</p>
+            <p>Power: 60 kW</p>
+            <p>Voltage: 400 V nominal</p>
+            <p class="status">● Demo: Available</p>
+            <p>Example price: ₹18/kWh</p>
+            <div class="actions">
+                <button onclick="openStation(23.0225,72.5714)">
+                    View Location
+                </button>
+                <button class="secondary"
+                    onclick="showCharger('Green Energy Hub',60,400)">
+                    Details
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🔋 City Charge Point</h3>
+            <p>📍 Ahmedabad, Gujarat</p>
+            <p>Charger: AC Charging</p>
+            <p>Power: 7.4 kW</p>
+            <p>Voltage: 230 V nominal</p>
+            <p class="status busy">● Demo: Occupied</p>
+            <p>Example price: ₹12/kWh</p>
+            <div class="actions">
+                <button onclick="openStation(23.0300,72.5800)">
+                    View Location
+                </button>
+                <button class="secondary"
+                    onclick="showCharger('City Charge Point',7.4,230)">
+                    Details
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>🚘 Highway EV Station</h3>
+            <p>📍 Ahmedabad region</p>
+            <p>Charger: DC Fast Charging</p>
+            <p>Power: 120 kW</p>
+            <p>Voltage: 400 V nominal</p>
+            <p class="status">● Demo: Available</p>
+            <p>Example price: ₹20/kWh</p>
+            <div class="actions">
+                <button onclick="openStation(23.0400,72.6000)">
+                    View Location
+                </button>
+                <button class="secondary"
+                    onclick="showCharger('Highway EV Station',120,400)">
+                    Details
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="charger-details" class="card" style="margin-top:20px;display:none">
+        <h3>Charger Details</h3>
+        <div id="charger-info"></div>
+    </div>
+</section>
+
+<!-- MAP -->
+<section id="map-section">
+    <h2 class="section-title">📍 Charging Station Map</h2>
+    <p class="section-desc">
+        View sample station locations. Allow location access to find your
+        current position. The map uses OpenStreetMap.
+    </p>
+
+    <div id="map"></div>
+
+    <div class="actions">
+        <button onclick="findMyLocation()">📍 Find My Location</button>
+        <button class="secondary" onclick="openMap()">
+            Open Map in New Tab
+        </button>
+    </div>
+
+    <p id="location-message" class="map-note">
+        Click "Find My Location" to request your device location.
+    </p>
+</section>
+
+<!-- FEATURES -->
+<section>
+    <h2 class="section-title">Why Choose EV Charge?</h2>
+
+    <div class="feature-grid">
+        <div class="card">
+            <h3>📍 Location Search</h3>
+            <p>Explore charging locations on a map.</p>
+        </div>
+
+        <div class="card">
+            <h3>🔋 Charger Details</h3>
+            <p>See rated charging power, nominal voltage and charger type.</p>
+        </div>
+
+        <div class="card">
+            <h3>🚨 Emergency Support</h3>
+            <p>Request assistance if your EV battery is running low.</p>
+        </div>
+    </div>
+</section>
+
+<!-- PAYMENT -->
+<section id="payment">
+    <h2 class="section-title">💳 Charging Payment</h2>
+    <p class="section-desc">
+        Demo QR code. Replace this with your verified merchant payment QR
+        before accepting real payments.
+    </p>
+
+    <div class="form-box qr-box">
+        <h3>Scan & Pay</h3>
+
+        <img id="qr-image"
+          alt="Demo QR code"
+          src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=EV-CHARGE-DEMO-NOT-A-REAL-PAYMENT">
+
+        <p>Example charging price: ₹18 per kWh</p>
+
+        <label for="units">Charging energy (kWh)</label>
+        <input id="units" type="number" min="0.1" max="500"
+          step="0.1" value="10">
+
+        <label for="rate">Price per kWh (₹)</label>
+        <input id="rate" type="number" min="0" max="1000"
+          step="0.5" value="18">
+
+        <button onclick="calculateCost()">Calculate Bill</button>
+
+        <h3 id="bill" style="margin-top:20px">Estimated total: ₹180</h3>
+
+        <p id="payment-note" class="map-note">
+            This demo does not process payments.
+        </p>
+    </div>
+</section>
+
+<!-- LOGIN -->
+<section id="login">
+    <h2 class="section-title" style="text-align:center">🔐 Login / Signup</h2>
+    <p class="section-desc" style="text-align:center">
+        Frontend demonstration only. No real account is created.
+    </p>
+
+    <div class="form-box">
+        <h3>Welcome to EV Charge</h3>
+
+        <form id="login-form">
+            <label for="name">Full Name</label>
+            <input id="name" type="text" placeholder="Enter your name" required>
+
+            <label for="email">Email Address</label>
+            <input id="email" type="email" placeholder="Enter your email" required>
+
+            <label for="password">Password</label>
+            <input id="password" type="password"
+              placeholder="Enter password (minimum 8 characters)"
+              minlength="8" required>
+
+            <button type="submit">Demo Login</button>
+        </form>
+
+        <p id="login-message"></p>
+    </div>
+</section>
+
+<!-- EMERGENCY -->
+<section>
+    <div class="card emergency">
+        <h2>🚨 Emergency EV Charging</h2>
+        <p>
+            Battery low? Find nearby stations or contact your roadside
+            assistance provider.
+        </p>
+
+        <div class="actions">
+            <button onclick="findMyLocation()">Find My Location</button>
+
+            <button onclick="emergencyHelp()">
+                Request Emergency Help
             </button>
+        </div>
 
-            <div class="nav-links" id="navLinks">
-                <a href="#home">Home</a>
-                <a href="#stations">Stations</a>
-                <a href="#booking">Book Charging</a>
-                <a href="#calculator">Cost Calculator</a>
-                <a href="#contact">Contact</a>
-            </div>
+        <p id="emergency-message"></p>
+    </div>
+</section>
 
-            <div class="nav-actions">
-                <button
-                    class="btn btn-outline"
-                    id="loginButton"
-                    type="button">
-                    Login
-                </button>
+<!-- CONTACT -->
+<section id="contact">
+    <h2 class="section-title">📞 Contact Us</h2>
+    <p class="section-desc">
+        Send a message to the EV Charge support team.
+    </p>
 
-                <button
-                    class="btn btn-primary"
-                    id="myBookingsButton"
-                    type="button">
-                    My Bookings
-                </button>
+    <div class="form-box">
+        <form id="contact-form">
+            <label for="contact-name">Your Name</label>
+            <input id="contact-name" type="text" required>
 
-                <button
-                    class="btn btn-outline hidden"
-                    id="logoutButton"
-                    type="button">
-                    Logout
-                </button>
-            </div>
+            <label for="contact-email">Your Email</label>
+            <input id="contact-email" type="email" required>
 
-        </nav>
-    </header>
+            <label for="topic">Subject</label>
+            <select id="topic">
+                <option>Charging Station</option>
+                <option>Payment Support</option>
+                <option>Emergency Assistance</option>
+                <option>Other</option>
+            </select>
 
+            <label for="contact-text">Message</label>
+            <textarea id="contact-text" rows="4" required></textarea>
 
-    <main>
+            <button type="submit">Send Message</button>
+        </form>
 
-        <!-- ================= HOME ================= -->
+        <p id="contact-message"></p>
+    </div>
+</section>
 
-        <section class="hero section" id="home">
+<footer>
+    <h3>⚡ EV CHARGE</h3>
+    <p>Powering a cleaner, greener future.</p>
+    <p>© 2026 EV Charge. Website demonstration.</p>
+</footer>
 
-            <div class="container hero-grid">
+<script>
+let currentLat = 23.0225;
+let currentLng = 72.5714;
 
-                <div class="hero-content">
+const stations = [
+    {name: "Green Energy Hub", lat: 23.0225, lng: 72.5714},
+    {name: "City Charge Point", lat: 23.0300, lng: 72.5800},
+    {name: "Highway EV Station", lat: 23.0400, lng: 72.6000}
+];
 
-                    <span class="eyebrow">
-                        ⚡ SMART EV CHARGING NETWORK
-                    </span>
+function showCharger(name, power, voltage) {
+    const box = document.getElementById("charger-details");
 
-                    <h1>
-                        Charge Your EV.
-                        <span>Drive Into The Future.</span>
+    box.style.display = "block";
+
+    document.getElementById("charger-info").innerHTML =
+        "<p><strong>Station:</strong> " + name + "</p>" +
+        "<p><strong>Rated Power:</strong> " + power + " kW</p>" +
+        "<p><strong>Nominal Voltage:</strong> " + voltage + " V</p>" +
+        "<p>These are example specifications, not live electrical readings.</p>";
+
+    box.scrollIntoView({behavior: "smooth"});
+}
+
+function openStation(lat, lng) {
+    currentLat = lat;
+    currentLng = lng;
+
+    document.getElementById("map").src =
+        "https://www.openstreetmap.org/export/embed.html?bbox=" +
+        (lng - 0.015) + "%2C" + (lat - 0.015) + "%2C" +
+        (lng + 0.015) + "%2C" + (lat + 0.015) +
+        "&layer=mapnik&marker=" + lat + "%2C" + lng;
+
+    document.getElementById("map-section").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function openMap() {
+    window.open(
+        "https://www.openstreetmap.org/?mlat=" + currentLat +
+        "&mlon=" + currentLng + "#map=14/" +
+        currentLat + "/" + currentLng,
+        "_blank"
+    );
+}
+
+function findMyLocation() {
+    const message = document.getElementById("location-message");
+
+    if (!navigator.geolocation) {
+        message.textContent = "Your browser does not support geolocation.";
+        return;
+    }
+
+    message.textContent = "Requesting location permission...";
+
+    navigator.geolocation.getCurrentPosition(
+        function(position) {
+            currentLat = position.coords.latitude;
+            currentLng = position.coords.longitude;
+
+            openStation(currentLat, currentLng);
+
+            message.textContent =
+                "Your current location: " +
+                currentLat.toFixed(5) + ", " +
+                currentLng.toFixed(5) +
+                ". This shows your location, not verified live charger availability.";
+        },
+        function(error) {
+            message.textContent =
+                "Location unavailable. Please allow location access " +
+                "and open this site using localhost or HTTPS.";
+        },
+        {enableHighAccuracy: true, timeout: 15000}
+    );
+}
+
+function calculateCost() {
+    const units = Number(document.getElementById("units").value);
+    const rate = Number(document.getElementById("rate").value);
+
+    if (!Number.isFinite(units) || !Number.isFinite(rate) ||
+        units <= 0 || units > 500 || rate < 0 || rate > 1000) {
+        alert("Please enter valid charging units and price.");
+        return;
+    }
+
+    const total = units * rate;
+
+    document.getElementById("bill").textContent =
+        "Estimated total: ₹" + total.toFixed(2);
+}
+
+document.getElementById("login-form").addEventListener(
+    "submit", function(event) {
+        event.preventDefault();
+
+        document.getElementById("login-message").textContent =
+            "Demo form submitted. Connect a secure authentication backend " +
+            "to create real accounts.";
+    }
+);
+
+document.getElementById("contact-form").addEventListener(
+    "submit", function(event) {
+        event.preventDefault();
+
+        document.getElementById("contact-message").textContent =
+            "Demo message prepared. Connect a backend or email service " +
+            "to deliver this message.";
+    }
+);
+
+function emergencyHelp() {
+    const message = document.getElementById("emergency-message");
+
+    message.textContent =
+        "Please use the station map to find nearby charging points, " +
+        "or contact your roadside assistance provider. No emergency " +
+        "request has been sent to a service provider.";
+}
+
+document.getElementById("map").src =
+    "https://www.openstreetmap.org/export/embed.html?bbox=" +
+    "72.54%2C22.99%2C72.62%2C23.06&layer=mapnik&marker=" +
+    "23.0225%2C72.5714";
+</script>
+
+</body>
+</html>
 ```
