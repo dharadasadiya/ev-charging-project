@@ -1,140 +1,175 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GreenCharge EV | Smart Charging</title>
+    <title>GreenCharge | EV Charging Network</title>
+
+    <meta name="description"
+          content="GreenCharge - Find, book and pay for EV charging stations.">
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- Our CSS -->
+    <!-- Leaflet Map -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          crossorigin="">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- ================= NAVBAR ================= -->
+
 <header class="navbar">
-    <div class="logo">
-        <div class="logo-icon">
-            <i class="fa-solid fa-bolt"></i>
+
+    <div class="nav-container">
+
+        <a href="#home" class="logo">
+            <span class="logo-icon">
+                <i class="fa-solid fa-bolt"></i>
+            </span>
+            <span>Green<span>Charge</span></span>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="#home">Home</a>
+            <a href="#stations">Stations</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#booking">Booking</a>
+            <a href="#payment">Payment</a>
+            <a href="#emergency">Emergency</a>
+            <a href="#admin">Admin</a>
+        </nav>
+
+        <div class="nav-actions">
+
+            <button class="location-btn" onclick="getLiveLocation()">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                <span>Live Location</span>
+            </button>
+
+            <button class="login-btn" id="loginNavBtn" onclick="openLogin()">
+                Login
+            </button>
+
+            <button class="menu-btn" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
         </div>
-        <div>
-            <h2>GreenCharge</h2>
-            <span>Smart EV Charging</span>
-        </div>
+
     </div>
 
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#stations">Stations</a>
-        <a href="#dashboard">Dashboard</a>
-        <a href="#booking">Booking</a>
-        <a href="#payment">Payment</a>
-        <a href="#emergency">Emergency</a>
-    </nav>
-
-    <div class="nav-actions">
-        <button class="location-btn" onclick="getLiveLocation()">
-            <i class="fa-solid fa-location-crosshairs"></i>
-            Live Location
-        </button>
-
-        <button class="login-btn" onclick="openLogin()">
-            Login
-        </button>
-    </div>
 </header>
 
 
 <!-- ================= HERO ================= -->
-<section id="home" class="hero">
 
-    <div class="hero-content">
+<section class="hero" id="home">
 
-        <span class="badge">
-            <i class="fa-solid fa-leaf"></i>
-            Smart & Eco-Friendly Charging
-        </span>
+    <div class="hero-container">
 
-        <h1>
-            Charge Your EV
-            <span>Smarter.</span>
-            Faster. Greener.
-        </h1>
+        <div class="hero-content">
 
-        <p>
-            Find nearby charging stations, check charger availability,
-            book a slot and manage your EV charging — all in one place.
-        </p>
-
-        <div class="hero-buttons">
-            <button class="primary-btn" onclick="findNearestStation()">
-                <i class="fa-solid fa-location-dot"></i>
-                Find Charging Station
-            </button>
-
-            <button class="secondary-btn" onclick="scrollToSection('stations')">
-                View Stations
-                <i class="fa-solid fa-arrow-right"></i>
-            </button>
-        </div>
-
-        <div class="hero-stats">
-            <div>
-                <strong>250+</strong>
-                <span>Stations</span>
+            <div class="hero-badge">
+                <i class="fa-solid fa-circle-check"></i>
+                Smart EV Charging Network
             </div>
 
-            <div>
-                <strong>1,200+</strong>
-                <span>Chargers</span>
+            <h1>
+                Charge Your EV.
+                <span>Drive Smarter.</span>
+            </h1>
+
+            <p>
+                Find nearby EV charging stations, check charger availability,
+                reserve a slot and manage your charging journey from one place.
+            </p>
+
+            <div class="hero-buttons">
+
+                <button class="primary-btn"
+                        onclick="findNearbyStations()">
+                    <i class="fa-solid fa-location-dot"></i>
+                    Find Charging Station
+                </button>
+
+                <button class="secondary-btn"
+                        onclick="scrollToSection('stations')">
+                    View Stations
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
             </div>
 
-            <div>
-                <strong>24/7</strong>
-                <span>Support</span>
+            <div class="hero-stats">
+
+                <div>
+                    <strong id="heroStations">24+</strong>
+                    <span>Stations</span>
+                </div>
+
+                <div>
+                    <strong>150+</strong>
+                    <span>Chargers</span>
+                </div>
+
+                <div>
+                    <strong>10K+</strong>
+                    <span>Users</span>
+                </div>
+
             </div>
+
         </div>
 
-    </div>
 
+        <div class="hero-card">
 
-    <div class="hero-card">
+            <div class="charging-circle">
 
-        <div class="charging-animation">
-            <div class="car-icon">
-                <i class="fa-solid fa-car-side"></i>
+                <div class="charging-inner">
+                    <i class="fa-solid fa-bolt"></i>
+                    <strong>78%</strong>
+                    <small>Battery</small>
+                </div>
+
             </div>
 
-            <div class="charging-line"></div>
+            <div class="charging-info">
 
-            <div class="charger-icon">
-                <i class="fa-solid fa-charging-station"></i>
+                <span>Current Charging</span>
+
+                <h3>GreenCharge Hub</h3>
+
+                <div class="progress">
+                    <div style="width:78%"></div>
+                </div>
+
+                <div class="charge-row">
+                    <span>
+                        <i class="fa-solid fa-bolt"></i>
+                        42.5 kWh
+                    </span>
+
+                    <span>
+                        18 min left
+                    </span>
+                </div>
+
             </div>
-        </div>
 
-        <div class="charge-status">
-            <span>Charging Status</span>
-            <strong>Ready to Charge</strong>
-        </div>
-
-        <div class="charge-progress">
-            <div class="progress-fill"></div>
-        </div>
-
-        <div class="charge-info">
-            <span>Battery</span>
-            <strong>82%</strong>
         </div>
 
     </div>
@@ -143,31 +178,31 @@
 
 
 <!-- ================= LOCATION ================= -->
+
 <section class="location-section">
 
-    <div class="section-heading">
-        <span class="small-title">LOCATION</span>
-        <h2>Find Chargers Near You</h2>
-        <p>Allow location access to discover nearby EV charging stations.</p>
-    </div>
+    <div class="section-container">
 
-    <div class="location-card">
+        <div class="location-box">
 
-        <div class="location-icon">
-            <i class="fa-solid fa-location-dot"></i>
+            <div class="location-icon">
+                <i class="fa-solid fa-location-dot"></i>
+            </div>
+
+            <div class="location-text">
+                <small>Your Location</small>
+                <strong id="locationText">
+                    Location not detected
+                </strong>
+            </div>
+
+            <button class="outline-btn"
+                    onclick="getLiveLocation()">
+                <i class="fa-solid fa-crosshairs"></i>
+                Detect Location
+            </button>
+
         </div>
-
-        <div class="location-text">
-            <h3 id="locationTitle">Your Location</h3>
-            <p id="locationText">
-                Location permission is not enabled.
-            </p>
-        </div>
-
-        <button class="primary-btn" onclick="getLiveLocation()">
-            <i class="fa-solid fa-crosshairs"></i>
-            Detect My Location
-        </button>
 
     </div>
 
@@ -175,322 +210,98 @@
 
 
 <!-- ================= STATIONS ================= -->
-<section id="stations" class="section">
 
-    <div class="section-heading center">
-        <span class="small-title">EV STATIONS</span>
-        <h2>Nearby Charging Stations</h2>
-        <p>Check real-time charger availability and reserve your slot.</p>
-    </div>
+<section class="section" id="stations">
 
+    <div class="section-container">
 
-    <div class="filter-bar">
+        <div class="section-heading">
 
-        <button class="filter active" onclick="filterStations('all', this)">
-            All
-        </button>
+            <div>
+                <span class="eyebrow">CHARGING NETWORK</span>
 
-        <button class="filter" onclick="filterStations('available', this)">
-            Available
-        </button>
+                <h2>
+                    Find a Charging Station
+                </h2>
 
-        <button class="filter" onclick="filterStations('fast', this)">
-            Fast Charging
-        </button>
-
-        <button class="filter" onclick="filterStations('free', this)">
-            Free
-        </button>
-
-    </div>
-
-
-    <div class="station-grid" id="stationGrid">
-
-        <!-- Station 1 -->
-        <div class="station-card"
-             data-status="available"
-             data-type="fast">
-
-            <div class="station-top">
-
-                <div class="station-icon">
-                    <i class="fa-solid fa-charging-station"></i>
-                </div>
-
-                <span class="status available">
-                    ● Available
-                </span>
-
+                <p>
+                    Discover available EV chargers near you.
+                </p>
             </div>
 
-            <h3>GreenCharge Hub</h3>
-
-            <p class="address">
-                <i class="fa-solid fa-location-dot"></i>
-                City Center, Ahmedabad
-            </p>
-
-            <div class="station-details">
-
-                <div>
-                    <span>Distance</span>
-                    <strong>1.2 km</strong>
-                </div>
-
-                <div>
-                    <span>Power</span>
-                    <strong>60 kW</strong>
-                </div>
-
-                <div>
-                    <span>Price</span>
-                    <strong>₹12/kWh</strong>
-                </div>
-
-            </div>
-
-            <div class="station-buttons">
-
-                <button class="outline-btn"
-                        onclick="showStationDetails('GreenCharge Hub')">
-                    Details
-                </button>
-
-                <button class="primary-btn"
-                        onclick="bookStation('GreenCharge Hub')">
-                    Book Now
-                </button>
-
-            </div>
+            <button class="outline-btn"
+                    onclick="findNearbyStations()">
+                <i class="fa-solid fa-location-crosshairs"></i>
+                Nearby Me
+            </button>
 
         </div>
 
 
-        <!-- Station 2 -->
-        <div class="station-card"
-             data-status="available"
-             data-type="fast">
+        <!-- FILTERS -->
 
-            <div class="station-top">
+        <div class="filters">
 
-                <div class="station-icon">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
+            <button class="filter active"
+                    data-filter="all"
+                    onclick="filterStations('all', this)">
+                All
+            </button>
 
-                <span class="status available">
-                    ● Available
-                </span>
+            <button class="filter"
+                    data-filter="available"
+                    onclick="filterStations('available', this)">
+                Available
+            </button>
 
-            </div>
+            <button class="filter"
+                    data-filter="fast"
+                    onclick="filterStations('fast', this)">
+                Fast Charging
+            </button>
 
-            <h3>EcoVolt Station</h3>
-
-            <p class="address">
-                <i class="fa-solid fa-location-dot"></i>
-                SG Highway, Ahmedabad
-            </p>
-
-            <div class="station-details">
-
-                <div>
-                    <span>Distance</span>
-                    <strong>2.5 km</strong>
-                </div>
-
-                <div>
-                    <span>Power</span>
-                    <strong>120 kW</strong>
-                </div>
-
-                <div>
-                    <span>Price</span>
-                    <strong>₹15/kWh</strong>
-                </div>
-
-            </div>
-
-            <div class="station-buttons">
-
-                <button class="outline-btn"
-                        onclick="showStationDetails('EcoVolt Station')">
-                    Details
-                </button>
-
-                <button class="primary-btn"
-                        onclick="bookStation('EcoVolt Station')">
-                    Book Now
-                </button>
-
-            </div>
+            <button class="filter"
+                    data-filter="free"
+                    onclick="filterStations('free', this)">
+                Low Price
+            </button>
 
         </div>
 
 
-        <!-- Station 3 -->
-        <div class="station-card"
-             data-status="busy"
-             data-type="normal">
+        <div class="station-layout">
 
-            <div class="station-top">
+            <!-- STATION LIST -->
 
-                <div class="station-icon">
-                    <i class="fa-solid fa-plug"></i>
+            <div class="station-list" id="stationList">
+
+                <!-- JS will insert stations -->
+
+            </div>
+
+
+            <!-- REAL MAP -->
+
+            <div class="map-wrapper">
+
+                <div id="map"></div>
+
+                <div class="map-overlay">
+
+                    <button onclick="locateOnMap()">
+                        <i class="fa-solid fa-crosshairs"></i>
+                    </button>
+
+                    <button onclick="zoomMap(1)">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+
+                    <button onclick="zoomMap(-1)">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+
                 </div>
 
-                <span class="status busy">
-                    ● Busy
-                </span>
-
-            </div>
-
-            <h3>PowerUp EV Point</h3>
-
-            <p class="address">
-                <i class="fa-solid fa-location-dot"></i>
-                Satellite Road, Ahmedabad
-            </p>
-
-            <div class="station-details">
-
-                <div>
-                    <span>Distance</span>
-                    <strong>3.1 km</strong>
-                </div>
-
-                <div>
-                    <span>Power</span>
-                    <strong>50 kW</strong>
-                </div>
-
-                <div>
-                    <span>Price</span>
-                    <strong>₹10/kWh</strong>
-                </div>
-
-            </div>
-
-            <div class="station-buttons">
-
-                <button class="outline-btn"
-                        onclick="showStationDetails('PowerUp EV Point')">
-                    Details
-                </button>
-
-                <button class="disabled-btn" disabled>
-                    Currently Busy
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- Station 4 -->
-        <div class="station-card"
-             data-status="available"
-             data-type="normal">
-
-            <div class="station-top">
-
-                <div class="station-icon">
-                    <i class="fa-solid fa-battery-three-quarters"></i>
-                </div>
-
-                <span class="status available">
-                    ● Available
-                </span>
-
-            </div>
-
-            <h3>VoltWay Charging</h3>
-
-            <p class="address">
-                <i class="fa-solid fa-location-dot"></i>
-                Prahlad Nagar, Ahmedabad
-            </p>
-
-            <div class="station-details">
-
-                <div>
-                    <span>Distance</span>
-                    <strong>4.2 km</strong>
-                </div>
-
-                <div>
-                    <span>Power</span>
-                    <strong>40 kW</strong>
-                </div>
-
-                <div>
-                    <span>Price</span>
-                    <strong>₹9/kWh</strong>
-                </div>
-
-            </div>
-
-            <div class="station-buttons">
-
-                <button class="outline-btn"
-                        onclick="showStationDetails('VoltWay Charging')">
-                    Details
-                </button>
-
-                <button class="primary-btn"
-                        onclick="bookStation('VoltWay Charging')">
-                    Book Now
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= MAP ================= -->
-<section class="map-section">
-
-    <div class="section-heading center">
-        <span class="small-title">LIVE MAP</span>
-        <h2>Charging Station Map</h2>
-        <p>View charging locations around you.</p>
-    </div>
-
-    <div class="map-container">
-
-        <div class="map-placeholder">
-
-            <div class="map-grid"></div>
-
-            <div class="map-pin pin-1">
-                <i class="fa-solid fa-charging-station"></i>
-            </div>
-
-            <div class="map-pin pin-2">
-                <i class="fa-solid fa-charging-station"></i>
-            </div>
-
-            <div class="map-pin pin-3">
-                <i class="fa-solid fa-charging-station"></i>
-            </div>
-
-            <div class="user-location">
-                <div class="pulse"></div>
-                <i class="fa-solid fa-location-dot"></i>
-            </div>
-
-            <div class="map-message">
-                <i class="fa-solid fa-map-location-dot"></i>
-                <h3>Interactive Map</h3>
-                <p>Click "Live Location" to detect your location.</p>
-
-                <button class="primary-btn"
-                        onclick="getLiveLocation()">
-                    Detect Location
-                </button>
             </div>
 
         </div>
@@ -501,145 +312,195 @@
 
 
 <!-- ================= DASHBOARD ================= -->
-<section id="dashboard" class="section dashboard-section">
 
-    <div class="section-heading">
-        <span class="small-title">MY DASHBOARD</span>
-        <h2>Charging Dashboard</h2>
-        <p>Track your EV charging activity.</p>
-    </div>
+<section class="section dashboard-section" id="dashboard">
 
+    <div class="section-container">
 
-    <div class="dashboard-grid">
-
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon">
-                <i class="fa-solid fa-bolt"></i>
-            </div>
+        <div class="section-heading">
 
             <div>
-                <span>Total Energy</span>
-                <h3>128.5 kWh</h3>
-            </div>
-        </div>
+                <span class="eyebrow">MY DASHBOARD</span>
 
+                <h2>Charging Overview</h2>
 
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon">
-                <i class="fa-solid fa-indian-rupee-sign"></i>
+                <p>
+                    Track your EV charging activity.
+                </p>
             </div>
 
-            <div>
-                <span>Total Spent</span>
-                <h3>₹1,542</h3>
-            </div>
-        </div>
-
-
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon">
-                <i class="fa-solid fa-calendar-check"></i>
-            </div>
-
-            <div>
-                <span>Bookings</span>
-                <h3>12</h3>
-            </div>
-        </div>
-
-
-        <div class="dashboard-card">
-            <div class="dashboard-card-icon">
-                <i class="fa-solid fa-leaf"></i>
-            </div>
-
-            <div>
-                <span>CO₂ Saved</span>
-                <h3>84.2 kg</h3>
-            </div>
-        </div>
-
-    </div>
-
-
-    <div class="charging-dashboard">
-
-        <div class="dashboard-chart">
-
-            <div class="chart-header">
-                <div>
-                    <span>Energy Usage</span>
-                    <h3>Weekly Charging</h3>
-                </div>
-
-                <button class="outline-btn"
-                        onclick="showReport()">
-                    View Report
-                </button>
-            </div>
-
-            <div class="bars">
-
-                <div class="bar-item">
-                    <div class="bar" style="height:45%"></div>
-                    <span>Mon</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:65%"></div>
-                    <span>Tue</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:40%"></div>
-                    <span>Wed</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:80%"></div>
-                    <span>Thu</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:60%"></div>
-                    <span>Fri</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:90%"></div>
-                    <span>Sat</span>
-                </div>
-
-                <div class="bar-item">
-                    <div class="bar" style="height:55%"></div>
-                    <span>Sun</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="battery-card">
-
-            <div class="battery-circle">
-                <strong>82%</strong>
-                <span>Battery</span>
-            </div>
-
-            <h3>Your EV</h3>
-
-            <p>Ready for approximately</p>
-
-            <strong class="range">
-                285 km
-            </strong>
-
-            <button class="primary-btn"
-                    onclick="startCharging()">
-                <i class="fa-solid fa-bolt"></i>
-                Start Charging
+            <button class="outline-btn"
+                    onclick="refreshDashboard()">
+                <i class="fa-solid fa-rotate"></i>
+                Refresh
             </button>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon green">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <div>
+                    <span>Total Energy</span>
+                    <h3 id="totalEnergy">126.8 kWh</h3>
+                    <small class="positive">
+                        +12.4% this month
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+
+                <div>
+                    <span>Total Spent</span>
+                    <h3 id="totalSpent">₹1,482</h3>
+                    <small>Current month</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon purple">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                <div>
+                    <span>Bookings</span>
+                    <h3 id="bookingCount">8</h3>
+                    <small>Completed sessions</small>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon orange">
+                    <i class="fa-solid fa-leaf"></i>
+                </div>
+
+                <div>
+                    <span>CO₂ Saved</span>
+                    <h3 id="co2Saved">42.6 kg</h3>
+                    <small>Environmental impact</small>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="dashboard-panels">
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <h3>Weekly Charging</h3>
+
+                    <span>This Week</span>
+                </div>
+
+                <div class="chart">
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:45%"></div>
+                        <span>Mon</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:70%"></div>
+                        <span>Tue</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:55%"></div>
+                        <span>Wed</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:85%"></div>
+                        <span>Thu</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:65%"></div>
+                        <span>Fri</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:90%"></div>
+                        <span>Sat</span>
+                    </div>
+
+                    <div class="bar-item">
+                        <div class="bar" style="height:40%"></div>
+                        <span>Sun</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel battery-panel">
+
+                <div class="panel-header">
+                    <h3>Vehicle Battery</h3>
+                    <span>EV-01</span>
+                </div>
+
+                <div class="battery">
+
+                    <div class="battery-body">
+                        <div class="battery-level"></div>
+                    </div>
+
+                    <div class="battery-tip"></div>
+
+                </div>
+
+                <div class="battery-value">
+                    78%
+                </div>
+
+                <p>
+                    Estimated range: <strong>284 km</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- BOOKING HISTORY -->
+
+        <div class="panel booking-history">
+
+            <div class="panel-header">
+
+                <h3>Recent Bookings</h3>
+
+                <button onclick="showAllBookings()">
+                    View All
+                </button>
+
+            </div>
+
+            <div id="bookingHistory"></div>
 
         </div>
 
@@ -649,61 +510,774 @@
 
 
 <!-- ================= BOOKING ================= -->
-<section id="booking" class="booking-section">
 
-    <div class="booking-container">
+<section class="section" id="booking">
+
+    <div class="section-container">
 
         <div class="section-heading">
-            <span class="small-title">RESERVE</span>
-            <h2>Book Your Charging Slot</h2>
-            <p>Select station, date and time.</p>
+
+            <div>
+                <span class="eyebrow">RESERVE A CHARGER</span>
+
+                <h2>Book Your Charging Slot</h2>
+
+                <p>
+                    Reserve a charger before you arrive.
+                </p>
+            </div>
+
         </div>
 
 
-        <form id="bookingForm" onsubmit="submitBooking(event)">
+        <div class="booking-wrapper">
 
-            <div class="form-grid">
+            <form class="booking-form"
+                  onsubmit="submitBooking(event)">
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Charging Station
+                        </label>
+
+                        <select id="bookingStation" required>
+                            <option value="">
+                                Select Station
+                            </option>
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Charger Type
+                        </label>
+
+                        <select id="chargerType" required>
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="AC">
+                                AC Charger
+                            </option>
+
+                            <option value="DC Fast">
+                                DC Fast Charger
+                            </option>
+
+                            <option value="Ultra Fast">
+                                Ultra Fast Charger
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label>
+                            Date
+                        </label>
+
+                        <input type="date"
+                               id="bookingDate"
+                               required>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Time
+                        </label>
+
+                        <input type="time"
+                               id="bookingTime"
+                               required>
+
+                    </div>
+
+                </div>
+
 
                 <div class="form-group">
-                    <label>Charging Station</label>
 
-                    <select id="bookingStation" required>
+                    <label>
+                        Duration
+                    </label>
 
-                        <option value="">
-                            Select Station
-                        </option>
+                    <select id="duration">
 
-                        <option>
-                            GreenCharge Hub
-                        </option>
-
-                        <option>
-                            EcoVolt Station
-                        </option>
-
-                        <option>
-                            VoltWay Charging
-                        </option>
+                        <option value="30">30 Minutes</option>
+                        <option value="60">1 Hour</option>
+                        <option value="90">1.5 Hours</option>
+                        <option value="120">2 Hours</option>
 
                     </select>
+
                 </div>
 
 
-                <div class="form-group">
-                    <label>Date</label>
+                <div class="booking-summary">
 
-                    <input type="date"
-                           id="bookingDate"
-                           required>
+                    <div>
+                        <span>Estimated Price</span>
+                        <strong id="estimatedPrice">
+                            ₹0
+                        </strong>
+                    </div>
+
                 </div>
 
 
-                <div class="form-group">
-                    <label>Time</label>
+                <button class="primary-btn full-btn"
+                        type="submit">
 
-                    <select id="bookingTime" required>
+                    <i class="fa-solid fa-calendar-check"></i>
 
-                        <option value="">
-                            Select Time
-                        </option>
-```
+                    Confirm Booking
+
+                </button>
+
+            </form>
+
+
+            <div class="booking-info">
+
+                <div class="info-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <h3>Easy & Secure Booking</h3>
+
+                <p>
+                    Select a station, choose your time and reserve
+                    your charger in seconds.
+                </p>
+
+                <ul>
+
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Real-time availability
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Instant confirmation
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Easy cancellation
+                    </li>
+
+                    <li>
+                        <i class="fa-solid fa-check"></i>
+                        Secure payment
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PAYMENT ================= -->
+
+<section class="section payment-section" id="payment">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="eyebrow">PAYMENT</span>
+
+                <h2>Pay For Charging</h2>
+
+                <p>
+                    Choose your preferred payment method.
+                </p>
+            </div>
+
+        </div>
+
+
+        <div class="payment-wrapper">
+
+            <div class="payment-card">
+
+                <div class="payment-tabs">
+
+                    <button class="payment-tab active"
+                            onclick="selectPayment('upi', this)">
+                        <i class="fa-solid fa-qrcode"></i>
+                        UPI / QR
+                    </button>
+
+                    <button class="payment-tab"
+                            onclick="selectPayment('card', this)">
+                        <i class="fa-solid fa-credit-card"></i>
+                        Card
+                    </button>
+
+                </div>
+
+
+                <div id="upiPayment">
+
+                    <div class="qr-code">
+
+                        <div class="qr-grid">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+
+                    </div>
+
+                    <p class="qr-text">
+                        Scan QR using any UPI app
+                    </p>
+
+                    <div class="upi-id">
+                        greencharge@upi
+                        <button onclick="copyUPI()">
+                            <i class="fa-regular fa-copy"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div id="cardPayment" class="hidden">
+
+                    <div class="form-group">
+
+                        <label>Card Number</label>
+
+                        <input type="text"
+                               id="cardNumber"
+                               placeholder="1234 5678 9012 3456"
+                               maxlength="19">
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label>Expiry</label>
+
+                            <input type="text"
+                                   placeholder="MM/YY">
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>CVV</label>
+
+                            <input type="password"
+                                   placeholder="***"
+                                   maxlength="3">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="amount-box">
+
+                    <span>Amount</span>
+
+                    <strong id="paymentAmount">
+                        ₹500
+                    </strong>
+
+                </div>
+
+
+                <button class="primary-btn full-btn"
+                        onclick="makePayment()">
+
+                    <i class="fa-solid fa-lock"></i>
+                    Pay Securely
+
+                </button>
+
+            </div>
+
+
+            <div class="payment-side">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <h3>Secure Payments</h3>
+
+                <p>
+                    Your payment information is protected.
+                    This website uses a demo payment system.
+                </p>
+
+                <div class="payment-methods">
+
+                    <span>UPI</span>
+                    <span>VISA</span>
+                    <span>Mastercard</span>
+                    <span>RuPay</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= EMERGENCY ================= -->
+
+<section class="section emergency-section" id="emergency">
+
+    <div class="section-container">
+
+        <div class="emergency-card">
+
+            <div class="emergency-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+
+            <div class="emergency-content">
+
+                <span>24/7 EMERGENCY SUPPORT</span>
+
+                <h2>Need Immediate Help?</h2>
+
+                <p>
+                    If you're facing an emergency while charging,
+                    contact emergency services or share your location.
+                </p>
+
+                <div class="emergency-buttons">
+
+                    <button class="danger-btn"
+                            onclick="callEmergency()">
+
+                        <i class="fa-solid fa-phone"></i>
+                        Call Emergency
+
+                    </button>
+
+                    <button class="light-danger-btn"
+                            onclick="sendEmergencyLocation()">
+
+                        <i class="fa-solid fa-location-dot"></i>
+                        Send My Location
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ADMIN ================= -->
+
+<section class="section" id="admin">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <span class="eyebrow">ADMINISTRATION</span>
+
+                <h2>Admin Control Panel</h2>
+
+                <p>
+                    Manage stations, users and system reports.
+                </p>
+
+            </div>
+
+            <span class="admin-status">
+                <i class="fa-solid fa-circle"></i>
+                System Online
+            </span>
+
+        </div>
+
+
+        <div class="admin-grid">
+
+            <div class="admin-card">
+
+                <i class="fa-solid fa-charging-station"></i>
+
+                <h3>Manage Stations</h3>
+
+                <p>
+                    Add and manage EV charging stations.
+                </p>
+
+                <button onclick="adminAction('stations')">
+                    Manage
+                </button>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>Manage Users</h3>
+
+                <p>
+                    View registered users and activity.
+                </p>
+
+                <button onclick="adminAction('users')">
+                    Manage
+                </button>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <h3>Reports</h3>
+
+                <p>
+                    View charging and revenue analytics.
+                </p>
+
+                <button onclick="showReport()">
+                    Generate Report
+                </button>
+
+            </div>
+
+
+            <div class="admin-card">
+
+                <i class="fa-solid fa-database"></i>
+
+                <h3>System Data</h3>
+
+                <p>
+                    Check system statistics.
+                </p>
+
+                <button onclick="showSystemStats()">
+                    View Stats
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="admin-table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>Station</th>
+                        <th>Status</th>
+                        <th>Chargers</th>
+                        <th>Power</th>
+                        <th>Price</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="adminTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-brand">
+
+            <a href="#home" class="logo">
+
+                <span class="logo-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </span>
+
+                <span>
+                    Green<span>Charge</span>
+                </span>
+
+            </a>
+
+            <p>
+                Powering a cleaner and smarter future
+                through EV charging.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <div>
+                <h4>Platform</h4>
+                <a href="#stations">Stations</a>
+                <a href="#booking">Booking</a>
+                <a href="#dashboard">Dashboard</a>
+            </div>
+
+            <div>
+                <h4>Support</h4>
+                <a href="#emergency">Emergency</a>
+                <a href="#" onclick="showToast('Help Center coming soon')">
+                    Help Center
+                </a>
+                <a href="#" onclick="showToast('Contact support: support@greencharge.demo')">
+                    Contact
+                </a>
+            </div>
+
+        </div>
+
+
+        <div class="footer-social">
+
+            <h4>Follow Us</h4>
+
+            <button onclick="socialMessage('Facebook')">
+                <i class="fa-brands fa-facebook-f"></i>
+            </button>
+
+            <button onclick="socialMessage('Instagram')">
+                <i class="fa-brands fa-instagram"></i>
+            </button>
+
+            <button onclick="socialMessage('LinkedIn')">
+                <i class="fa-brands fa-linkedin-in"></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <span>
+            © 2026 GreenCharge. All rights reserved.
+        </span>
+
+        <span>
+            Made for a greener future 🌱
+        </span>
+
+    </div>
+
+</footer>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div class="modal" id="loginModal">
+
+    <div class="modal-box">
+
+        <button class="close-modal"
+                onclick="closeModal('loginModal')">
+            ×
+        </button>
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-bolt"></i>
+        </div>
+
+        <h2>Welcome Back</h2>
+
+        <p>Login to your GreenCharge account.</p>
+
+        <form onsubmit="loginUser(event)">
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input type="email"
+                       id="loginEmail"
+                       placeholder="you@example.com"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       id="loginPassword"
+                       placeholder="••••••••"
+                       required>
+
+            </div>
+
+            <button class="primary-btn full-btn">
+                Login
+            </button>
+
+        </form>
+
+        <p class="switch-text">
+            Don't have an account?
+            <button onclick="switchToSignup()">
+                Sign Up
+            </button>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SIGNUP MODAL ================= -->
+
+<div class="modal" id="signupModal">
+
+    <div class="modal-box">
+
+        <button class="close-modal"
+                onclick="closeModal('signupModal')">
+            ×
+        </button>
+
+        <div class="modal-icon">
+            <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <h2>Create Account</h2>
+
+        <p>Join the GreenCharge network.</p>
+
+        <form onsubmit="signupUser(event)">
+
+            <div class="form-group">
+
+                <label>Full Name</label>
+
+                <input type="text"
+                       id="signupName"
+                       placeholder="Your Name"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Email</label>
+
+                <input type="email"
+                       id="signupEmail"
+                       placeholder="you@example.com"
+                       required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Password</label>
+
+                <input type="password"
+                       id="signupPassword"
+                       placeholder="Create password"
+                       minlength="6"
+                       required>
+
+            </div>
+
+            <button class="primary-btn full-btn">
+                Create Account
+            </button>
+
+        </form>
+
+        <p class="switch-text">
+            Already have an account?
+            <button onclick="switchToLogin()">
+                Login
+            </button>
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="toastMessage">
+        Success
+    </span>
+
+</div>
+
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin=""></script>
+
+<!-- JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>
