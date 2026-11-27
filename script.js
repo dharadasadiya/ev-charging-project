@@ -1,171 +1,192 @@
-// Ahmedabad EV Charging Stations
 const stations = [
-    {
-        name: "Tata Power Charging Station",
-        area: "SG Highway",
-        type: "DC Fast Charging",
-        power: "60 kW"
-    },
-    {
-        name: "Statiq Charging Station",
-        area: "Prahlad Nagar",
-        type: "DC Fast Charging",
-        power: "30 kW"
-    },
-    {
-        name: "ChargeZone Station",
-        area: "Satellite",
-        type: "DC Fast Charging",
-        power: "60 kW"
-    },
-    {
-        name: "Jio-bp Pulse",
-        area: "Thaltej",
-        type: "Fast Charging",
-        power: "50 kW"
-    },
-    {
-        name: "Ather Grid",
-        area: "Vastrapur",
-        type: "AC Charging",
-        power: "7 kW"
-    },
-    {
-        name: "EV Charging Point",
-        area: "Bopal",
-        type: "AC Charging",
-        power: "22 kW"
-    }
+  {
+    id: 1,
+    name: "EV Charging Hub",
+    area: "SG Highway, Ahmedabad",
+    connector: "CCS2",
+    power: "60 kW",
+    price: 18
+  },
+  {
+    id: 2,
+    name: "GreenCharge",
+    area: "Prahlad Nagar, Ahmedabad",
+    connector: "Type 2",
+    power: "22 kW",
+    price: 16
+  },
+  {
+    id: 3,
+    name: "VoltPoint",
+    area: "Vastrapur, Ahmedabad",
+    connector: "CCS2",
+    power: "50 kW",
+    price: 19
+  },
+  {
+    id: 4,
+    name: "CityCharge",
+    area: "Maninagar, Ahmedabad",
+    connector: "Bharat DC",
+    power: "30 kW",
+    price: 15
+  },
+  {
+    id: 5,
+    name: "EcoPlug",
+    area: "Satellite, Ahmedabad",
+    connector: "Type 2",
+    power: "22 kW",
+    price: 17
+  },
+  {
+    id: 6,
+    name: "ChargeWay",
+    area: "Gota, Ahmedabad",
+    connector: "CCS2",
+    power: "60 kW",
+    price: 18
+  }
 ];
 
-// Display stations
-function displayStations(data) {
+function displayStations() {
+  const search = document
+    .getElementById("stationSearch")
+    .value.toLowerCase();
 
-    const list = document.getElementById("stationList");
+  const connector =
+    document.getElementById("connectorFilter").value;
 
-    list.innerHTML = "";
+  const filtered = stations.filter(station =>
+    (station.name + station.area).toLowerCase().includes(search) &&
+    (connector === "all" || station.connector === connector)
+  );
 
-    data.forEach((station) => {
+  document.getElementById("stationGrid").innerHTML =
+    filtered.map(station => `
+      <div class="station-card">
+        <h3>${station.name}</h3>
+        <p>📍 ${station.area}</p>
+        <p>⚡ ${station.power}</p>
+        <p>🔌 ${station.connector}</p>
+        <p>₹${station.price} per kWh</p>
 
-        list.innerHTML += `
-            <div class="station-card">
+        <a class="btn"
+          href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(station.area)}"
+          target="_blank">
+          Get Directions
+        </a>
 
-                <h3>${station.name}</h3>
-
-                <p>Location: ${station.area}</p>
-
-                <p>Type: ${station.type}</p>
-
-                <p>Power: ${station.power}</p>
-
-                <a target="_blank"
-                   href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(station.name + " " + station.area + " Ahmedabad")}">
-                   View on Google Maps
-                </a>
-
-            </div>
-        `;
-
-    });
+        <button class="btn" onclick="bookStation(${station.id})">
+          Book Slot
+        </button>
+      </div>
+    `).join("");
 }
 
-// Search station
-function searchStation() {
+document.getElementById("stationSearch")
+  .addEventListener("input", displayStations);
 
-    const value = document
-        .getElementById("search")
-        .value.toLowerCase();
+document.getElementById("connectorFilter")
+  .addEventListener("change", displayStations);
 
-    const filtered = stations.filter(station =>
-
-        station.name.toLowerCase().includes(value) ||
-        station.area.toLowerCase().includes(value)
-
-    );
-
-    displayStations(filtered);
-}
-
-// Fill station dropdown
-const dropdown = document.getElementById("station");
-
-stations.forEach((station, index) => {
-
-    const option = document.createElement("option");
-
-    option.value = index;
-    option.textContent = station.name + " - " + station.area;
-
-    dropdown.appendChild(option);
-
-});
-
-// Booking system
-document.getElementById("bookingForm")
-.addEventListener("submit", function(event) {
-
-    event.preventDefault();
-
-    const booking = {
-
-        name: document.getElementById("name").value,
-
-        email: document.getElementById("email").value,
-
-        phone: document.getElementById("phone").value,
-
-        station: dropdown.value,
-
-        date: document.getElementById("date").value,
-
-        time: document.getElementById("time").value
-
-    };
-
-    let bookings = JSON.parse(
-        localStorage.getItem("bookings") || "[]"
-    );
-
-    bookings.push(booking);
-
-    localStorage.setItem(
-        "bookings",
-        JSON.stringify(bookings)
-    );
-
-    document.getElementById("bookingMessage")
-    .innerHTML = "Booking saved successfully!";
-
-    this.reset();
-
-});
-
-// Charging cost calculator
 function calculateCost() {
+  const units = Number(document.getElementById("units").value);
+  const rate = Number(document.getElementById("rate").value);
 
-    const units = Number(
-        document.getElementById("units").value
-    );
+  if (units <= 0 || rate < 0) {
+    alert("Please enter valid values.");
+    return;
+  }
 
-    const price = Number(
-        document.getElementById("price").value
-    );
+  const total = units * rate;
 
-    if (units <= 0 || price < 0 ||
-        !Number.isFinite(units + price)) {
-
-        document.getElementById("result")
-        .innerHTML = "Please enter valid values.";
-
-        return;
-    }
-
-    const total = units * price;
-
-    document.getElementById("result")
-    .innerHTML = "Estimated Cost: ₹" + total.toFixed(2);
-
+  document.getElementById("result").innerText =
+    "Estimated Cost: ₹" + total.toFixed(2);
 }
 
-// Initial display
-displayStations(stations);
+function openAuth() {
+  document.getElementById("authModal").classList.remove("hidden");
+}
+
+function closeAuth() {
+  document.getElementById("authModal").classList.add("hidden");
+}
+
+document.getElementById("authBtn")
+  .addEventListener("click", openAuth);
+
+function signupUser() {
+  const name = document.getElementById("userName").value;
+  const email = document.getElementById("userEmail").value;
+  const password = document.getElementById("userPassword").value;
+
+  if (!name || !email || password.length < 6) {
+    alert("Enter your name, valid email and password of at least 6 characters.");
+    return;
+  }
+
+  const users = JSON.parse(localStorage.getItem("users") || "{}");
+
+  if (users[email]) {
+    alert("This email is already registered.");
+    return;
+  }
+
+  users[email] = { name, password };
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Account created successfully!");
+}
+
+function loginUser() {
+  const email = document.getElementById("userEmail").value;
+  const password = document.getElementById("userPassword").value;
+
+  const users = JSON.parse(localStorage.getItem("users") || "{}");
+
+  if (users[email] && users[email].password === password) {
+    localStorage.setItem("currentUser", email);
+    alert("Login successful!");
+    closeAuth();
+  } else {
+    alert("Incorrect email or password.");
+  }
+}
+
+function bookStation(id) {
+  const email = localStorage.getItem("currentUser");
+
+  if (!email) {
+    alert("Please login before booking.");
+    openAuth();
+    return;
+  }
+
+  const station = stations.find(s => s.id === id);
+
+  const date = prompt("Enter booking date (YYYY-MM-DD):");
+  const time = prompt("Enter booking time (HH:MM):");
+
+  if (!date || !time) return;
+
+  const bookings = JSON.parse(
+    localStorage.getItem("bookings") || "[]"
+  );
+
+  bookings.push({
+    id: Date.now(),
+    email,
+    station: station.name,
+    area: station.area,
+    date,
+    time
+  });
+
+  localStorage.setItem("bookings", JSON.stringify(bookings));
+
+  alert("Demo booking saved successfully!");
+}
+
+displayStations();
