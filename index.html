@@ -745,25 +745,24 @@
 
                 <div id="upiPayment">
 
-                    <div class="qr-code">
+                    <div class="qr-code" id="paymentQr"
+                         role="img" aria-label="UPI payment QR code"></div>
 
-                        <div class="qr-grid">
-                            <span></span><span></span><span></span>
-                            <span></span><span></span><span></span>
-                            <span></span><span></span><span></span>
-                        </div>
-
-                    </div>
-
-                    <p class="qr-text">
-                        Scan QR using any UPI app
+                    <p class="qr-text" id="qrStatus" aria-live="polite">
+                        Scan with a UPI app and verify payment details.
                     </p>
 
                     <div class="upi-id">
-                        greencharge@upi
-                        <button onclick="copyUPI()">
-                            <i class="fa-regular fa-copy"></i>
-                        </button>
+                        <label for="merchantUpiId">Receiver UPI ID</label>
+                        <div class="upi-entry">
+                            <input id="merchantUpiId" type="text"
+                                   value="greencharge@upi" autocomplete="off"
+                                   spellcheck="false" aria-describedby="qrStatus">
+                            <button type="button" onclick="copyUPI()"
+                                    aria-label="Copy receiver UPI ID" title="Copy UPI ID">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
                     </div>
 
                 </div>
@@ -819,11 +818,11 @@
                 </div>
 
 
-                <button class="primary-btn full-btn"
-                        onclick="makePayment()">
+                <button class="primary-btn full-btn" id="paymentAction"
+                        type="button" onclick="makePayment()">
 
                     <i class="fa-solid fa-lock"></i>
-                    Pay Securely
+                    <span id="paymentActionText">Open UPI App</span>
 
                 </button>
 
@@ -1089,22 +1088,14 @@
         </div>
 
 
-        <div class="footer-social">
-
-            <h4>Follow Us</h4>
-
-            <button onclick="socialMessage('Facebook')">
-                <i class="fa-brands fa-facebook-f"></i>
-            </button>
-
-            <button onclick="socialMessage('Instagram')">
-                <i class="fa-brands fa-instagram"></i>
-            </button>
-
-            <button onclick="socialMessage('LinkedIn')">
-                <i class="fa-brands fa-linkedin-in"></i>
-            </button>
-
+        <div class="footer-credit">
+            <span class="footer-credit-icon" aria-hidden="true">
+                <i class="fa-solid fa-bolt"></i>
+            </span>
+            <p>
+                <span>Created by</span>
+                <strong>Dhara &amp; Samiksha</strong>
+            </p>
         </div>
 
     </div>
@@ -1275,6 +1266,9 @@
 <!-- Leaflet -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         crossorigin=""></script>
+
+<!-- QR code generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <!-- JavaScript -->
 <script src="script.js"></script>
