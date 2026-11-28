@@ -1,120 +1,186 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VoltRoute | EV Charging</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EV Finder Ahmedabad</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
 </head>
 <body>
 
-<header class="topbar">
-  <a class="brand" href="#home">⚡ Volt<span>Route</span></a>
+<header>
+    <h2>⚡ EV Finder</h2>
 
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#stations">Find Chargers</a>
-    <a href="#how">How it works</a>
-    <a href="#calculator">Calculator</a>
-  </nav>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#stations">Stations</a>
+        <a href="#map">Live Map</a>
+        <a href="#dashboard">Dashboard</a>
+        <a href="#emergency">Emergency</a>
+    </nav>
 
-  <button class="btn" id="authBtn">Login / Sign up</button>
+    <button onclick="openLogin()">Login</button>
 </header>
 
 <section class="hero" id="home">
-  <div>
-    <p>YOUR JOURNEY, FULLY CHARGED</p>
-    <h1>Find a charge.<br><span>Find your freedom.</span></h1>
-    <p>Discover EV charging stations around Ahmedabad.</p>
-    <a href="#stations" class="btn">Explore Stations →</a>
-  </div>
-
-  <div class="hero-image">
-    ⚡
-    <h2>80% Charged</h2>
-    <p>Ready for the next mile</p>
-  </div>
-</section>
-
-<section class="search-section" id="stations">
-  <h2>Explore Charging Stations</h2>
-
-  <input type="search" id="stationSearch"
-         placeholder="Search station or area">
-
-  <select id="connectorFilter">
-    <option value="all">All Connectors</option>
-    <option value="CCS2">CCS2</option>
-    <option value="Type 2">Type 2</option>
-    <option value="Bharat DC">Bharat DC</option>
-  </select>
-
-  <div class="station-grid" id="stationGrid"></div>
-</section>
-
-<section class="how-section" id="how">
-  <h2>How VoltRoute Works</h2>
-
-  <div class="steps">
     <div>
-      <h3>01. Find a Station</h3>
-      <p>Search EV charging stations near you.</p>
+        <h1>Find EV Charging Stations</h1>
+        <h2>Across Ahmedabad</h2>
+
+        <p>
+            Find nearby EV charging stations,
+            check availability and book your slot.
+        </p>
+
+        <button onclick="findLocation()">
+            Find Near Me
+        </button>
+
+        <button onclick="showStations()">
+            Explore Stations
+        </button>
+    </div>
+</section>
+
+<section id="stations">
+    <h1>Charging Stations</h1>
+
+    <input
+        type="text"
+        id="search"
+        placeholder="Search station or area..."
+        onkeyup="displayStations()"
+    >
+
+    <select id="filter" onchange="displayStations()">
+        <option value="All">All Stations</option>
+        <option value="Available">Available</option>
+        <option value="Busy">Busy</option>
+    </select>
+
+    <div id="stationList" class="station-grid"></div>
+</section>
+
+<section id="map">
+    <h1>Live Charging Map</h1>
+    <div id="mapArea"></div>
+
+    <button onclick="findLocation()">
+        Find My Location
+    </button>
+</section>
+
+<section id="dashboard">
+    <h1>My Dashboard</h1>
+
+    <div class="dashboard-box">
+        <h2>My Bookings</h2>
+        <h1 id="bookingCount">0</h1>
     </div>
 
-    <div>
-      <h3>02. Book a Slot</h3>
-      <p>Select your date and preferred time.</p>
-    </div>
-
-    <div>
-      <h3>03. Charge & Go</h3>
-      <p>Reach the station and charge your EV.</p>
-    </div>
-  </div>
+    <div id="myBookings"></div>
 </section>
 
-<section class="calculator" id="calculator">
-  <h2>Charging Cost Calculator</h2>
+<section id="how">
+    <h1>How To Charge Your EV</h1>
 
-  <label>Energy Required (kWh)</label>
-  <input type="number" id="units" value="20">
-
-  <label>Rate per Unit (₹)</label>
-  <input type="number" id="rate" value="18">
-
-  <button class="btn" onclick="calculateCost()">Calculate</button>
-
-  <h3 id="result">Estimated Cost: ₹0</h3>
+    <div class="steps">
+        <div>01 - Park your vehicle safely.</div>
+        <div>02 - Select compatible charging connector.</div>
+        <div>03 - Connect the charging cable.</div>
+        <div>04 - Start charging using the station instructions.</div>
+        <div>05 - Stop charging before disconnecting.</div>
+    </div>
 </section>
 
-<footer>
-  <h2>⚡ VoltRoute</h2>
+<section id="options">
+    <h1>Charging Options</h1>
 
-  <div class="social">
-    <a href="https://instagram.com/">Instagram</a>
-    <a href="https://facebook.com/">Facebook</a>
-    <a href="https://linkedin.com/">LinkedIn</a>
-  </div>
+    <div class="steps">
+        <div>AC Charging</div>
+        <div>DC Fast Charging</div>
+        <div>CCS2 Connector</div>
+        <div>Type 2 Connector</div>
+    </div>
+</section>
 
-  <p>Presented by Dhara</p>
-  <p>© 2026 VoltRoute. All Rights Reserved.</p>
-</footer>
+<section id="emergency">
+    <h1>Emergency Steps</h1>
 
-<div id="authModal" class="modal hidden">
-  <div class="modal-box">
-    <button onclick="closeAuth()" class="close">×</button>
+    <div class="steps">
+        <div>1. Stop charging if safe.</div>
+        <div>2. Do not touch damaged cables.</div>
+        <div>3. Move away from electrical hazards.</div>
+        <div>4. Contact the station operator.</div>
+        <div>5. Call 112 for emergencies in India.</div>
+    </div>
+</section>
 
-    <h2 id="authTitle">Login</h2>
+<!-- LOGIN POPUP -->
 
-    <input id="userName" placeholder="Full Name">
-    <input id="userEmail" type="email" placeholder="Email">
-    <input id="userPassword" type="password" placeholder="Password">
+<div id="loginBox" class="popup">
+    <div class="popup-content">
+        <span onclick="closeLogin()" class="close">×</span>
 
-    <button class="btn" onclick="loginUser()">Login</button>
-    <button class="btn" onclick="signupUser()">Sign Up</button>
-  </div>
+        <h2>User Login</h2>
+
+        <input id="username" placeholder="Your Name">
+        <input id="email" type="email" placeholder="Email">
+        <input id="password" type="password" placeholder="Password">
+
+        <button onclick="login()">Login / Signup</button>
+    </div>
 </div>
 
+<!-- BOOKING POPUP -->
+
+<div id="bookingBox" class="popup">
+    <div class="popup-content">
+
+        <span onclick="closeBooking()" class="close">×</span>
+
+        <h2>Book Charging Slot</h2>
+
+        <input type="hidden" id="stationId">
+
+        <label>Select Date</label>
+        <input type="date" id="date">
+
+        <label>Select Time</label>
+        <select id="time">
+            <option>09:00 AM</option>
+            <option>10:00 AM</option>
+            <option>11:00 AM</option>
+            <option>12:00 PM</option>
+            <option>01:00 PM</option>
+            <option>02:00 PM</option>
+            <option>03:00 PM</option>
+            <option>04:00 PM</option>
+            <option>05:00 PM</option>
+        </select>
+
+        <input id="vehicle" placeholder="Vehicle Name">
+
+        <button onclick="makePayment()">
+            Continue To Payment
+        </button>
+    </div>
+</div>
+
+<footer>
+    <h2>⚡ EV Finder Ahmedabad</h2>
+    <p>Find. Charge. Move Green.</p>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="script.js"></script>
+
 </body>
 </html>
+```
